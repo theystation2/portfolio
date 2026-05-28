@@ -124,3 +124,103 @@ body {
 ::selection {
   background: rgba(167, 139, 250, 0.3);
 }
+
+/* WHIMSY MODE — everything dialed to 11 */
+
+@keyframes rainbow {
+  0% { filter: hue-rotate(0deg); }
+  100% { filter: hue-rotate(360deg); }
+}
+
+@keyframes wobble {
+  0%, 100% { transform: rotate(-1deg); }
+  50% { transform: rotate(1deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes disco {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes sparkle {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.2); }
+}
+
+[data-whimsy="true"] {
+  cursor: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32'><text y='24' font-size='24'>🐱</text></svg>") 4 4, auto;
+}
+
+[data-whimsy="true"] body {
+  font-family: 'Comic Sans MS', 'Chalkboard SE', cursive !important;
+  background: linear-gradient(135deg, #1a0033, #0d001a, #001a0d, #1a0033) !important;
+  background-size: 400% 400% !important;
+  animation: disco 8s ease infinite !important;
+}
+
+[data-whimsy="true"] h1 {
+  animation: rainbow 3s linear infinite, float 2s ease-in-out infinite !important;
+  font-size: 3rem !important;
+  text-shadow: 0 0 10px rgba(167, 139, 250, 0.5), 0 0 40px rgba(244, 114, 182, 0.3) !important;
+}
+
+[data-whimsy="true"] h2 {
+  animation: wobble 0.5s ease-in-out infinite !important;
+}
+
+[data-whimsy="true"] h3 {
+  animation: float 3s ease-in-out infinite !important;
+}
+
+[data-whimsy="true"] a {
+  animation: sparkle 1.5s ease-in-out infinite !important;
+  text-decoration: underline wavy !important;
+}
+
+[data-whimsy="true"] p {
+  animation: wobble 4s ease-in-out infinite !important;
+}
+
+[data-whimsy="true"] img {
+  animation: float 2s ease-in-out infinite, rainbow 5s linear infinite !important;
+  border-radius: 50% !important;
+  transform-origin: center !important;
+}
+
+[data-whimsy="true"] [class*="rounded-xl"],
+[data-whimsy="true"] [class*="rounded-lg"] {
+  animation: wobble 3s ease-in-out infinite !important;
+  border-color: hotpink !important;
+  box-shadow: 0 0 15px rgba(255, 105, 180, 0.4), inset 0 0 15px rgba(167, 139, 250, 0.1) !important;
+}
+
+[data-whimsy="true"] [class*="font-mono"] {
+  font-family: 'Comic Sans MS', cursive !important;
+  color: hotpink !important;
+}
+
+[data-whimsy="true"] span[class*="tag"] {
+  animation: rainbow 2s linear infinite !important;
+  border-radius: 50px !important;
+  transform: rotate(-3deg) !important;
+}
+
+[data-whimsy="true"] footer {
+  font-size: 1.5rem !important;
+  animation: float 1.5s ease-in-out infinite !important;
+}
+
+[data-whimsy="true"] button {
+  border-radius: 50px !important;
+}
+
+[data-whimsy="true"]::selection {
+  background: hotpink !important;
+  color: yellow !important;
+}
