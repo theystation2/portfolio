@@ -22,10 +22,10 @@ export const projects: Project[] = [
     slug: "ucr-triage",
     title: "User communications review automation",
     description:
-      "Designing the content and interaction model for automated triage of user-facing communications at scale.",
+      "Designing the content and interaction model for automated triage of user-facing communications at scale — shifting a manual review process into a principled automation system.",
     role: "Content design + systems",
     year: "2026",
-    tags: ["Automation", "Ops tooling", "Content systems"],
+    tags: ["Automation", "Ops tooling", "Content systems", "LLM"],
   },
   {
     slug: "placeholder-1",

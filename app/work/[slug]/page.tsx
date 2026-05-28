@@ -30,6 +30,10 @@ export default async function WorkPage({
     return <BillingIACaseStudy project={project} />;
   }
 
+  if (project.slug === "ucr-triage") {
+    return <UCRTriageCaseStudy project={project} />;
+  }
+
   return (
     <div className="flex flex-col flex-1">
       <header className="w-full max-w-3xl mx-auto px-6 pt-16 pb-8">
@@ -396,6 +400,304 @@ function BillingIACaseStudy({ project }: { project: typeof projects[number] }) {
         <footer className="pt-8 border-t border-[var(--border)]">
           <p className="text-xs font-mono text-[var(--muted)] opacity-50">
             // interactive prototype available internally · principles doc in review
+          </p>
+        </footer>
+      </main>
+    </div>
+  );
+}
+
+// ─── UCR Triage Case Study ────────────────────────────────────────────────────
+
+function TriageFlowDiagram() {
+  const steps = [
+    { label: "Communication created", type: "trigger", detail: "Jira ticket enters queue" },
+    { label: "LLM triage handler", type: "process", detail: "Evaluates intent, audience, content type" },
+    { label: "Classification", type: "decision", detail: "Route, flag, or approve" },
+    { label: "Team notification", type: "output", detail: "Slack + assignee routing" },
+  ];
+
+  return (
+    <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6">
+      <div className="text-[var(--muted)] mb-4 text-[10px] font-mono uppercase tracking-wide">Triage pipeline</div>
+      <div className="flex flex-col gap-2">
+        {steps.map((step, i) => (
+          <div key={step.label} className="flex items-center gap-3">
+            <div className="flex flex-col items-center">
+              <div className={`w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-mono font-bold ${
+                step.type === "trigger" ? "bg-[var(--accent)]/20 text-[var(--accent)]" :
+                step.type === "process" ? "bg-[var(--accent-warm)]/20 text-[var(--accent-warm)]" :
+                step.type === "decision" ? "bg-[var(--accent-cool)]/20 text-[var(--accent-cool)]" :
+                "bg-[var(--tag-bg)] text-[var(--muted)]"
+              }`}>
+                {String(i + 1).padStart(2, "0")}
+              </div>
+              {i < steps.length - 1 && <div className="w-px h-4 bg-[var(--border)]" />}
+            </div>
+            <div className="flex-1 flex items-baseline justify-between gap-4 py-1.5">
+              <span className="text-xs font-medium text-[var(--foreground)]">{step.label}</span>
+              <span className="text-[10px] font-mono text-[var(--muted)] opacity-60">{step.detail}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function InfraStackViz() {
+  const layers = [
+    { label: "Feature flag", items: ["enable_ucr_triage_handler"], desc: "Controls rollout + kill switch" },
+    { label: "Handler", items: ["jira_llm_hook"], desc: "Evaluates ticket on creation/update" },
+    { label: "Routing", items: ["project.yaml", "flags.yaml"], desc: "Determines team, channel, urgency" },
+    { label: "Notification", items: ["Slack channel", "Email group"], desc: "Surfaces results to reviewers" },
+  ];
+
+  return (
+    <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6">
+      <div className="text-[var(--muted)] mb-4 text-[10px] font-mono uppercase tracking-wide">System layers</div>
+      <div className="space-y-3">
+        {layers.map((layer) => (
+          <div key={layer.label} className="flex items-start gap-4">
+            <span className="text-[10px] font-mono text-[var(--accent)] uppercase tracking-wide w-24 shrink-0 pt-0.5">
+              {layer.label}
+            </span>
+            <div className="flex-1 flex items-center gap-2 flex-wrap">
+              {layer.items.map((item) => (
+                <span key={item} className="text-[10px] font-mono px-2 py-1 rounded bg-[var(--tag-bg)] text-[var(--foreground)] border border-[var(--border)]">
+                  {item}
+                </span>
+              ))}
+              <span className="text-[10px] text-[var(--muted)] ml-1">{layer.desc}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function BeforeAfterViz() {
+  return (
+    <div className="grid grid-cols-2 gap-4">
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-5">
+        <div className="text-[10px] font-mono uppercase tracking-wide text-[var(--accent-warm)] mb-3">Before</div>
+        <ul className="space-y-2 text-xs text-[var(--muted)]">
+          <li className="flex gap-2"><span className="opacity-40">·</span> Manual triage by content designers</li>
+          <li className="flex gap-2"><span className="opacity-40">·</span> Tickets sit in queue for hours/days</li>
+          <li className="flex gap-2"><span className="opacity-40">·</span> No consistent classification criteria</li>
+          <li className="flex gap-2"><span className="opacity-40">·</span> Reviewer context-switches constantly</li>
+          <li className="flex gap-2"><span className="opacity-40">·</span> Noise spread across general channels</li>
+        </ul>
+      </div>
+      <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-5">
+        <div className="text-[10px] font-mono uppercase tracking-wide text-[var(--accent)] mb-3">After</div>
+        <ul className="space-y-2 text-xs text-[var(--muted)]">
+          <li className="flex gap-2"><span className="text-[var(--accent)]">→</span> LLM evaluates on ticket creation</li>
+          <li className="flex gap-2"><span className="text-[var(--accent)]">→</span> Classification in seconds, not hours</li>
+          <li className="flex gap-2"><span className="text-[var(--accent)]">→</span> Principled rules of engagement applied</li>
+          <li className="flex gap-2"><span className="text-[var(--accent)]">→</span> Humans review decisions, not raw tickets</li>
+          <li className="flex gap-2"><span className="text-[var(--accent)]">→</span> Isolated testing channel for validation</li>
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+function UCRTriageCaseStudy({ project }: { project: typeof projects[number] }) {
+  return (
+    <div className="flex flex-col flex-1">
+      <header className="w-full max-w-3xl mx-auto px-6 pt-16 pb-8">
+        <Link
+          href="/"
+          className="text-xs font-mono text-[var(--accent)] hover:text-[var(--accent-warm)] transition-colors mb-8 inline-block"
+        >
+          &larr; index
+        </Link>
+        <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+          {project.title}
+        </h1>
+        <div className="flex flex-wrap gap-x-6 gap-y-2 mt-5 py-4 border-y border-[var(--border)]">
+          <Meta k="role" v={project.role} />
+          <Meta k="year" v={project.year} />
+          <Meta k="tags" v={project.tags.join(", ")} />
+          <Meta k="status" v="shipping" />
+        </div>
+      </header>
+
+      <main className="w-full max-w-3xl mx-auto px-6 pb-24 space-y-12">
+
+        {/* Context */}
+        <section>
+          <SectionLabel>context</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              Every user-facing communication at a large fintech — emails, in-app messages, SMS,
+              push notifications — goes through a review process before it ships. This ensures
+              regulatory compliance, brand consistency, and content quality. The volume is massive:
+              hundreds of communications are created or modified weekly across dozens of product teams.
+            </p>
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              The content design team was the bottleneck. Every ticket landed in the same queue,
+              regardless of complexity. A one-word copy change sat alongside a full regulatory
+              rewrite. Triage was manual, inconsistent, and ate into the time designers could
+              spend on actual design work.
+            </p>
+          </div>
+        </section>
+
+        {/* Challenge */}
+        <section>
+          <SectionLabel>the challenge</SectionLabel>
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 space-y-3">
+            <p className="text-sm text-[var(--foreground)] opacity-90 leading-relaxed">
+              Build an automated triage system that:
+            </p>
+            <ul className="space-y-2 text-sm text-[var(--muted)]">
+              <li className="flex gap-2"><span className="text-[var(--accent)]">→</span> Classifies incoming communications tickets by intent, audience, and complexity</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">→</span> Routes work to the right reviewer (or approves low-risk changes automatically)</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">→</span> Applies consistent &ldquo;rules of engagement&rdquo; that the team has defined but never systematized</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">→</span> Ships incrementally with a kill switch and isolated testing before production rollout</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Approach */}
+        <section>
+          <SectionLabel>approach</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              I treated this as a content design problem first and an engineering problem second.
+              The core question wasn&rsquo;t &ldquo;can we use an LLM to read tickets&rdquo; — it was
+              &ldquo;what are the actual decision criteria that a skilled content designer applies
+              when triaging, and can we codify them?&rdquo;
+            </p>
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              This meant articulating the implicit rules the team had been applying by feel:
+              What makes a communication &ldquo;low risk&rdquo;? What signals require senior review?
+              When should a ticket be bounced back to the requesting team before it ever reaches
+              design? These rules became the system&rsquo;s prompt architecture — structured,
+              testable, versionable.
+            </p>
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              The engineering side followed naturally: a feature flag controlling rollout, a handler
+              triggered on ticket creation, classification logic, and routing rules that map to
+              existing team infrastructure (project ownership, Slack channels, escalation paths).
+            </p>
+          </div>
+        </section>
+
+        {/* Flow diagram */}
+        <section>
+          <SectionLabel>manifestation: triage pipeline</SectionLabel>
+          <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed">
+            The system operates as a four-stage pipeline triggered by ticket creation. Each stage
+            is independently testable, and the feature flag can halt the pipeline at any point.
+          </p>
+          <TriageFlowDiagram />
+        </section>
+
+        {/* Before/After */}
+        <section>
+          <SectionLabel>manifestation: before and after</SectionLabel>
+          <BeforeAfterViz />
+        </section>
+
+        {/* Infrastructure */}
+        <section>
+          <SectionLabel>manifestation: system infrastructure</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              Shipping an automation system into an existing org requires more than code. It requires
+              operational infrastructure that isolates testing noise, routes alerts to the right
+              humans, and provides a clear audit trail. Each layer was stood up deliberately:
+            </p>
+            <InfraStackViz />
+          </div>
+        </section>
+
+        {/* Design decisions */}
+        <section>
+          <SectionLabel>key design decisions</SectionLabel>
+          <div className="space-y-4">
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5">
+              <h4 className="text-sm font-semibold text-[var(--foreground)] mb-2">
+                Rules of engagement as structured prompts
+              </h4>
+              <p className="text-xs text-[var(--muted)] leading-relaxed">
+                The team&rsquo;s implicit triage criteria were codified into structured evaluation rules
+                rather than freeform prompt instructions. This makes them auditable, versionable, and
+                testable — a content designer can read the rules and verify they match team practice
+                without understanding the underlying model.
+              </p>
+            </div>
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5">
+              <h4 className="text-sm font-semibold text-[var(--foreground)] mb-2">
+                Isolated testing before production
+              </h4>
+              <p className="text-xs text-[var(--muted)] leading-relaxed">
+                A dedicated Slack channel and email group were created exclusively for automation
+                output during validation. This means the team&rsquo;s primary channels stay clean,
+                and false positives during testing don&rsquo;t create noise in production workflows.
+                The system earns trust before it gets production permissions.
+              </p>
+            </div>
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5">
+              <h4 className="text-sm font-semibold text-[var(--foreground)] mb-2">
+                Humans review decisions, not tickets
+              </h4>
+              <p className="text-xs text-[var(--muted)] leading-relaxed">
+                The system doesn&rsquo;t remove humans from the loop — it changes what they review.
+                Instead of reading every raw ticket and deciding what to do, designers now review
+                the system&rsquo;s classification and either confirm or override. The cognitive load
+                shifts from &ldquo;what is this?&rdquo; to &ldquo;is this right?&rdquo;
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Content design angle */}
+        <section>
+          <SectionLabel>the content design angle</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              This project reframes what &ldquo;content design&rdquo; means in an era of automation.
+              The traditional framing: content designers write and review copy. The expanded framing:
+              content designers define the rules by which language is evaluated, classified, and routed —
+              whether those rules are applied by a person or a machine.
+            </p>
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              The LLM is not replacing the content designer. It&rsquo;s executing the content
+              designer&rsquo;s judgment at scale. The designer&rsquo;s job shifts upstream: from
+              &ldquo;review this ticket&rdquo; to &ldquo;define what good review looks like and
+              verify the system applies it correctly.&rdquo;
+            </p>
+          </div>
+        </section>
+
+        {/* What's next */}
+        <section>
+          <SectionLabel>what&rsquo;s next</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              The system is in pre-production testing with live tickets routed to an isolated channel.
+              Next steps: measuring classification accuracy against human triage decisions, expanding
+              the rules of engagement to cover edge cases surfaced during testing, and defining
+              the confidence threshold at which the system can approve low-risk changes without
+              human confirmation.
+            </p>
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              The longer arc: if this pattern works for communications review, it generalizes to
+              any content governance workflow — style guide enforcement, terminology consistency,
+              accessibility compliance. The same &ldquo;codify implicit judgment, automate
+              classification, shift humans to oversight&rdquo; pattern applies.
+            </p>
+          </div>
+        </section>
+
+        <footer className="pt-8 border-t border-[var(--border)]">
+          <p className="text-xs font-mono text-[var(--muted)] opacity-50">
+            // system in pre-production validation · shipping incrementally
           </p>
         </footer>
       </main>
