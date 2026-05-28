@@ -20,8 +20,7 @@ export default function Home() {
               Jack Horton
             </h1>
             <p className="mt-4 text-lg text-[var(--foreground)] opacity-90 max-w-lg leading-relaxed">
-              Content designer building clarity into complex systems — for
-              humans and machines alike.
+              Content designer. 10+ years. Based in Montreal.
             </p>
             <p className="mt-2 text-sm text-[var(--muted)] max-w-lg leading-relaxed">
               Currently at Stripe, working on billing, developer tools, and
@@ -63,6 +62,26 @@ export default function Home() {
       </header>
 
       <main className="w-full max-w-3xl mx-auto px-6 pb-24">
+        <section className="mb-16">
+          <div className="flex items-center gap-3 mb-6">
+            <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--muted)]">
+              about
+            </h2>
+            <div className="flex-1 h-px bg-[var(--border)]" />
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
+            <div className="space-y-2">
+              <SchemaLine k="experience" v="10+ years" />
+              <SchemaLine k="location" v="montreal" />
+              <SchemaLine k="education" v="phd, english literature" />
+            </div>
+            <div className="space-y-2">
+              <SchemaLine k="passions" v="animals, literacy" />
+              <SchemaLine k="why_good" v="i genuinely, genuinely care" />
+            </div>
+          </div>
+        </section>
+
         <div className="flex items-center gap-3 mb-8">
           <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--muted)]">
             selected_work
