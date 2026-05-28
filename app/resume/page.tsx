@@ -86,16 +86,14 @@ export default function ResumePage() {
             title="Senior Content Designer"
             company="Stripe"
             period="2022 – present"
-            description="Content design lead for Revenue & Finance Automation (billing, tax, reporting, accounting). Leading information architecture, content systems, and operational automation across Stripe's billing platform."
+            description="Content design lead for billing, tax, reporting, and accounting. Information architecture, content systems, and operational automation."
             highlights={[
-              "Led billing information architecture redesign — defining principles for navigation, object placement, and agent-ready surfaces across subscriptions, usage-based billing, invoicing, and retention",
-              "Designed and shipped automated communications triage system (UCR) — codifying content review rules into LLM-evaluated pipeline, shifting team from manual ticket review to decision oversight",
-              "Built Dante rule evaluation framework — structured eval harness for testing UX writing rule changes with blinded judging, cluster regression testing, and golden set calibration",
-              "Drove SaaS pricing content strategy across lifecycle touchpoints — frameworks projected $2.5–3M/month revenue uplift",
-              "Created label standardization taxonomy and Sail guide governing 10,000+ dashboard strings",
-              "Led cross-product voice & tone meta-analysis synthesizing research across 12 product areas",
-              "Shaped accounting product vision and reporting futures UX strategy",
-              "Contributed multiple components and guides to Sail design system (tooltips, callouts, starter guides, contextual education, data visualization)",
+              "Led billing IA redesign — navigation principles, object placement, and agent-ready overview surfaces",
+              "Designed automated communications triage system — LLM-evaluated pipeline replacing manual review",
+              "Built structured evaluation framework for UX writing rule changes (blinded judging, regression testing)",
+              "SaaS pricing content strategy — $2.5–3M/month projected revenue uplift",
+              "Label standardization taxonomy and Sail design system contributions",
+              "Cross-product voice & tone meta-analysis across 12 product areas",
             ]}
           />
 
