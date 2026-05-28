@@ -33,19 +33,19 @@ export default function Home() {
             <SchemaLine k="role" v="content designer" />
             <SchemaLine k="org" v="stripe" />
             <SchemaLine k="focus" v="[billing, devtools, ops]" />
-            <SchemaLine k="status" v="available" />
+            <SchemaLine k="status" v="employed / available" />
           </div>
         </div>
         <div className="flex gap-4 mt-6 text-sm">
           <a
-            href="mailto:jack@stripe.com"
+            href="mailto:jackphorton@proton.me"
             className="text-[var(--accent)] hover:text-[var(--accent-warm)] transition-colors"
           >
             email
           </a>
           <span className="text-[var(--border)]">/</span>
           <a
-            href="https://linkedin.com/in/jackhorton"
+            href="https://www.linkedin.com/in/jack-horton-84a285140/"
             className="text-[var(--accent)] hover:text-[var(--accent-warm)] transition-colors"
             target="_blank"
             rel="noopener noreferrer"
