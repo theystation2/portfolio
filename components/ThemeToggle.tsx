@@ -22,6 +22,12 @@ export function ThemeToggle() {
     const savedVision = localStorage.getItem("vision") as Vision | null;
     if (savedTheme) setTheme(savedTheme);
     if (savedVision) setVision(savedVision);
+
+    const hasVisited = localStorage.getItem("has_visited");
+    if (!hasVisited) {
+      setOpen(true);
+      localStorage.setItem("has_visited", "true");
+    }
   }, []);
 
   useEffect(() => {
