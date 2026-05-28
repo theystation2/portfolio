@@ -1,79 +1,118 @@
 import Link from "next/link";
 import { projects } from "@/lib/projects";
 
+function SchemaLine({ k, v }: { k: string; v: string }) {
+  return (
+    <span className="font-mono text-xs text-[var(--muted)] leading-relaxed">
+      <span className="text-[var(--accent)] opacity-60">{k}:</span>{" "}
+      <span className="text-[var(--foreground)] opacity-80">{v}</span>
+    </span>
+  );
+}
+
 export default function Home() {
   return (
     <div className="flex flex-col flex-1">
-      <header className="w-full max-w-3xl mx-auto px-6 pt-16 pb-12">
-        <h1 className="text-3xl font-semibold tracking-tight text-[var(--foreground)]">
-          Jack Horton
-        </h1>
-        <p className="mt-3 text-lg text-[var(--muted)] max-w-xl leading-relaxed">
-          Content designer building clarity into complex systems. Currently at
-          Stripe, working on billing, developer tools, and operational
-          automation.
-        </p>
-        <div className="flex gap-4 mt-5 text-sm">
+      <header className="w-full max-w-3xl mx-auto px-6 pt-20 pb-16">
+        <div className="flex items-start justify-between gap-8">
+          <div>
+            <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-[var(--accent)] via-[var(--accent-warm)] to-[var(--accent-cool)] bg-clip-text text-transparent">
+              Jack Horton
+            </h1>
+            <p className="mt-4 text-lg text-[var(--foreground)] opacity-90 max-w-lg leading-relaxed">
+              Content designer building clarity into complex systems — for
+              humans and machines alike.
+            </p>
+            <p className="mt-2 text-sm text-[var(--muted)] max-w-lg leading-relaxed">
+              Currently at Stripe, working on billing, developer tools, and
+              operational automation. Building for a future where consumers are
+              sometimes human and sometimes machine.
+            </p>
+          </div>
+          <div className="hidden sm:flex flex-col gap-1 pt-2 shrink-0 text-right">
+            <SchemaLine k="role" v="content designer" />
+            <SchemaLine k="org" v="stripe" />
+            <SchemaLine k="focus" v="[billing, devtools, ops]" />
+            <SchemaLine k="status" v="available" />
+          </div>
+        </div>
+        <div className="flex gap-4 mt-6 text-sm">
           <a
             href="mailto:jack@stripe.com"
-            className="text-[var(--accent)] hover:underline"
+            className="text-[var(--accent)] hover:text-[var(--accent-warm)] transition-colors"
           >
-            Email
+            email
           </a>
+          <span className="text-[var(--border)]">/</span>
           <a
             href="https://linkedin.com/in/jackhorton"
-            className="text-[var(--accent)] hover:underline"
+            className="text-[var(--accent)] hover:text-[var(--accent-warm)] transition-colors"
             target="_blank"
             rel="noopener noreferrer"
           >
-            LinkedIn
+            linkedin
           </a>
         </div>
       </header>
 
       <main className="w-full max-w-3xl mx-auto px-6 pb-24">
-        <h2 className="text-xs font-medium uppercase tracking-widest text-[var(--muted)] mb-6">
-          Selected work
-        </h2>
+        <div className="flex items-center gap-3 mb-8">
+          <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--muted)]">
+            selected_work
+          </h2>
+          <div className="flex-1 h-px bg-[var(--border)]" />
+          <span className="text-xs font-mono text-[var(--muted)] opacity-50">
+            {projects.length} entries
+          </span>
+        </div>
         <div className="flex flex-col gap-4">
-          {projects.map((project) => (
+          {projects.map((project, i) => (
             <Link
               key={project.slug}
               href={`/work/${project.slug}`}
-              className="block bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 hover:border-[var(--accent)] hover:shadow-sm transition-all group"
+              className="block bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 hover:border-[var(--accent)] hover:shadow-[0_0_20px_rgba(167,139,250,0.08)] transition-all group relative overflow-hidden"
             >
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <h3 className="text-base font-medium text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
+              <div className="absolute top-4 right-4 font-mono text-[10px] text-[var(--muted)] opacity-40 group-hover:opacity-70 transition-opacity">
+                [{String(i).padStart(2, "0")}]
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="flex-1">
+                  <h3 className="text-base font-semibold text-[var(--foreground)] group-hover:text-[var(--accent)] transition-colors">
                     {project.title}
                   </h3>
-                  <p className="mt-1 text-sm text-[var(--muted)] leading-relaxed">
+                  <p className="mt-2 text-sm text-[var(--muted)] leading-relaxed">
                     {project.description}
                   </p>
-                  {project.tags.length > 0 && (
-                    <div className="flex gap-2 mt-3 flex-wrap">
-                      {project.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs px-2 py-0.5 rounded-md bg-[var(--background)] text-[var(--muted)] border border-[var(--border)]"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
+                  <div className="flex items-center gap-3 mt-4">
+                    {project.tags.length > 0 && (
+                      <div className="flex gap-1.5 flex-wrap">
+                        {project.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-[var(--tag-bg)] text-[var(--tag-text)] border border-[var(--border)]"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <div className="text-xs text-[var(--muted)] whitespace-nowrap shrink-0 pt-0.5">
-                  {project.year}
-                </div>
+              </div>
+              <div className="flex items-center gap-4 mt-4 pt-3 border-t border-[var(--border)]">
+                <SchemaLine k="role" v={project.role} />
+                <span className="text-[var(--border)]">·</span>
+                <SchemaLine k="year" v={project.year} />
               </div>
             </Link>
           ))}
         </div>
       </main>
 
-      <footer className="mt-auto py-8 text-center text-xs text-[var(--muted)]">
-        Built with Next.js
+      <footer className="mt-auto py-10 text-center">
+        <p className="text-xs font-mono text-[var(--muted)] opacity-40">
+          human_readable: true · machine_readable: true
+        </p>
       </footer>
     </div>
   );
