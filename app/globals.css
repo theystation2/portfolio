@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
-:root {
+:root,
+[data-theme="dark"] {
   --background: #0c0c0f;
   --foreground: #f0f0f3;
   --muted: #8b8b9e;
@@ -12,6 +13,98 @@
   --surface-raised: #1a1a2a;
   --tag-bg: #1f1f2e;
   --tag-text: #a78bfa;
+  --gradient-from: #a78bfa;
+  --gradient-via: #f472b6;
+  --gradient-to: #67e8f9;
+  --toggle-bg: #1f1f2e;
+  --toggle-border: #2a2a3e;
+  --toggle-active: #a78bfa;
+}
+
+[data-theme="light"] {
+  --background: #fafafa;
+  --foreground: #1a1a2e;
+  --muted: #6b7280;
+  --accent: #7c3aed;
+  --accent-warm: #db2777;
+  --accent-cool: #0891b2;
+  --border: #e5e7eb;
+  --surface: #ffffff;
+  --surface-raised: #f9fafb;
+  --tag-bg: #f3f4f6;
+  --tag-text: #7c3aed;
+  --gradient-from: #7c3aed;
+  --gradient-via: #db2777;
+  --gradient-to: #0891b2;
+  --toggle-bg: #f3f4f6;
+  --toggle-border: #e5e7eb;
+  --toggle-active: #7c3aed;
+}
+
+[data-vision="deuteranopia"] {
+  --accent: #4a90d9;
+  --accent-warm: #d4a017;
+  --accent-cool: #e8e8e8;
+  --tag-text: #4a90d9;
+  --gradient-from: #4a90d9;
+  --gradient-via: #d4a017;
+  --gradient-to: #e8e8e8;
+  --toggle-active: #4a90d9;
+}
+
+[data-vision="deuteranopia"][data-theme="light"] {
+  --accent: #2563eb;
+  --accent-warm: #b45309;
+  --accent-cool: #475569;
+  --tag-text: #2563eb;
+  --gradient-from: #2563eb;
+  --gradient-via: #b45309;
+  --gradient-to: #475569;
+  --toggle-active: #2563eb;
+}
+
+[data-vision="protanopia"] {
+  --accent: #60a5fa;
+  --accent-warm: #fbbf24;
+  --accent-cool: #d1d5db;
+  --tag-text: #60a5fa;
+  --gradient-from: #60a5fa;
+  --gradient-via: #fbbf24;
+  --gradient-to: #d1d5db;
+  --toggle-active: #60a5fa;
+}
+
+[data-vision="protanopia"][data-theme="light"] {
+  --accent: #1d4ed8;
+  --accent-warm: #92400e;
+  --accent-cool: #374151;
+  --tag-text: #1d4ed8;
+  --gradient-from: #1d4ed8;
+  --gradient-via: #92400e;
+  --gradient-to: #374151;
+  --toggle-active: #1d4ed8;
+}
+
+[data-vision="tritanopia"] {
+  --accent: #f472b6;
+  --accent-warm: #34d399;
+  --accent-cool: #e5e7eb;
+  --tag-text: #f472b6;
+  --gradient-from: #f472b6;
+  --gradient-via: #34d399;
+  --gradient-to: #e5e7eb;
+  --toggle-active: #f472b6;
+}
+
+[data-vision="tritanopia"][data-theme="light"] {
+  --accent: #be185d;
+  --accent-warm: #047857;
+  --accent-cool: #374151;
+  --tag-text: #be185d;
+  --gradient-from: #be185d;
+  --gradient-via: #047857;
+  --gradient-to: #374151;
+  --toggle-active: #be185d;
 }
 
 @theme inline {
@@ -25,6 +118,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 ::selection {

@@ -35,7 +35,7 @@ export default async function WorkPage({
         >
           &larr; index
         </Link>
-        <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-[var(--accent)] to-[var(--accent-cool)] bg-clip-text text-transparent">
+        <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)] bg-clip-text text-transparent">
           {project.title}
         </h1>
         <div className="flex flex-wrap gap-x-6 gap-y-2 mt-5 py-4 border-y border-[var(--border)]">

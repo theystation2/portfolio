@@ -16,7 +16,7 @@ export default function Home() {
       <header className="w-full max-w-3xl mx-auto px-6 pt-20 pb-16">
         <div className="flex items-start justify-between gap-8">
           <div>
-            <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-[var(--accent)] via-[var(--accent-warm)] to-[var(--accent-cool)] bg-clip-text text-transparent">
+            <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)] bg-clip-text text-transparent">
               Jack Horton
             </h1>
             <p className="mt-4 text-lg text-[var(--foreground)] opacity-90 max-w-lg leading-relaxed">
