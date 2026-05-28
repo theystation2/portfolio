@@ -34,6 +34,10 @@ export default async function WorkPage({
     return <UCRTriageCaseStudy project={project} />;
   }
 
+  if (project.slug === "skills-personal-software") {
+    return <SkillsPersonalSoftware project={project} />;
+  }
+
   return (
     <div className="flex flex-col flex-1">
       <header className="w-full max-w-3xl mx-auto px-6 pt-16 pb-8">
@@ -500,6 +504,220 @@ function BeforeAfterViz() {
           <li className="flex gap-2"><span className="text-[var(--accent)]">→</span> Isolated testing channel for validation</li>
         </ul>
       </div>
+    </div>
+  );
+}
+
+function SkillCard({
+  title,
+  type,
+  description,
+  details,
+}: {
+  title: string;
+  type: string;
+  description: string;
+  details: string[];
+}) {
+  return (
+    <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 relative overflow-hidden">
+      <div className="absolute top-4 right-4 text-[10px] font-mono px-2 py-0.5 rounded-md bg-[var(--tag-bg)] text-[var(--tag-text)] border border-[var(--border)]">
+        {type}
+      </div>
+      <h3 className="text-base font-semibold text-[var(--foreground)] mb-2 pr-20">
+        {title}
+      </h3>
+      <p className="text-sm text-[var(--muted)] leading-relaxed mb-4">
+        {description}
+      </p>
+      <div className="flex flex-wrap gap-x-4 gap-y-1">
+        {details.map((d) => (
+          <span key={d} className="text-[10px] font-mono text-[var(--foreground)] opacity-60">
+            {d}
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SkillsPersonalSoftware({ project }: { project: typeof projects[number] }) {
+  return (
+    <div className="flex flex-col flex-1">
+      <header className="w-full max-w-3xl mx-auto px-6 pt-16 pb-8">
+        <Link
+          href="/"
+          className="text-xs font-mono text-[var(--accent)] hover:text-[var(--accent-warm)] transition-colors mb-8 inline-block"
+        >
+          &larr; index
+        </Link>
+        <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+          {project.title}
+        </h1>
+        <div className="flex flex-wrap gap-x-6 gap-y-2 mt-5 py-4 border-y border-[var(--border)]">
+          <Meta k="role" v={project.role} />
+          <Meta k="year" v={project.year} />
+          <Meta k="tags" v={project.tags.join(", ")} />
+        </div>
+      </header>
+
+      <main className="w-full max-w-3xl mx-auto px-6 pb-24 space-y-12">
+
+        <section>
+          <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+            I build personal software and Claude-native tooling to solve my own workflow problems —
+            then share what generalizes. These aren&rsquo;t portfolio pieces in the traditional sense;
+            they&rsquo;re working tools I use daily. The thread connecting them: context-aware software
+            that treats the developer (or designer) as a system participant, not just an end user.
+          </p>
+        </section>
+
+        {/* Strata */}
+        <section>
+          <SectionLabel>strata</SectionLabel>
+          <SkillCard
+            title="Strata"
+            type="macOS app"
+            description="A native floating panel that aggregates work context — calendar, email, pull requests, Jira tickets, Figma files, and Claude sessions with cost tracking — into a persistent sidebar. Built as an AI Day project in Swift 6.2 and SwiftUI, shared internally at Stripe where others have forked it for their own workflows."
+            details={[
+              "Swift 6.2 / SwiftUI",
+              "NSPanel floating window",
+              "launchd polling",
+              "drag-to-reorder sections",
+              "collapse-to-strip mode",
+            ]}
+          />
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The design principle: your work context shouldn&rsquo;t require six browser tabs and a
+              mental model of which tool holds which information. A single surface, always visible,
+              showing what matters right now. The &ldquo;Now/Next&rdquo; framing at the top replaces
+              a todo list with temporal awareness — what&rsquo;s happening in the next 30 minutes,
+              and what&rsquo;s after that.
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              Built natively because Electron would fight macOS window management. The panel sits
+              at a window level that avoids Spaces/Mission Control interference while remaining
+              permanently accessible via a global hotkey.
+            </p>
+          </div>
+        </section>
+
+        {/* Greenlight */}
+        <section>
+          <SectionLabel>greenlight</SectionLabel>
+          <SkillCard
+            title="Greenlight"
+            type="Claude skill"
+            description="A pre-push validation skill that translates PR diffs into plain-English manifests, then checks whether supporting pieces (feature flags, registry entries, package imports, test files) are present. Catches architectural gaps before CI does — saving 10-20 minute feedback loops per push."
+            details={[
+              "pre-push hook",
+              "diff → manifest translation",
+              "missing-piece detection",
+              "CI failure prevention",
+            ]}
+          />
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The insight: most CI failures for a non-engineer shipping code aren&rsquo;t logic errors —
+              they&rsquo;re missing supporting infrastructure that the code itself doesn&rsquo;t reference
+              directly. A new handler needs a project.yaml entry. A flag needs a flags.yaml declaration.
+              These are knowable before push if you check.
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              Greenlight reads the diff, identifies what kind of change it is, and verifies the
+              ecosystem around it is complete. The result: significantly fewer wasted CI runs and
+              a tighter feedback loop between &ldquo;I think this is done&rdquo; and &ldquo;this is
+              actually done.&rdquo;
+            </p>
+          </div>
+        </section>
+
+        {/* Session memory */}
+        <section>
+          <SectionLabel>structured session memory</SectionLabel>
+          <SkillCard
+            title="Persistent memory system"
+            type="Claude pattern"
+            description="A file-based memory architecture that builds context across conversations — user preferences, project state, feedback patterns, and external references. Designed so Claude can resume mid-task without re-explaining context, and accumulate judgment about how to work with me specifically."
+            details={[
+              "4 memory types",
+              "frontmatter + index",
+              "cross-linking via [[refs]]",
+              "auto-eviction of stale state",
+            ]}
+          />
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The core design decision: separate what&rsquo;s durable (user preferences, validated
+              approaches, external resource locations) from what&rsquo;s ephemeral (current task state,
+              debugging steps). Memories are typed — <em>user</em>, <em>feedback</em>, <em>project</em>,
+              <em>reference</em> — so they can be selectively loaded based on relevance rather than
+              dumped wholesale into context.
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The feedback type is particularly valuable: it captures corrections and confirmations
+              with a &ldquo;why&rdquo; annotation, so the system can generalize from specific incidents
+              rather than just memorizing rules. &ldquo;Don&rsquo;t mock the database&rdquo; becomes
+              useful when you know <em>why</em> — a prior migration failure — because you can judge
+              whether the rule applies in a new context.
+            </p>
+          </div>
+        </section>
+
+        {/* Protodash workflow */}
+        <section>
+          <SectionLabel>protodash → vercel pipeline</SectionLabel>
+          <SkillCard
+            title="Rapid prototyping workflow"
+            type="workflow"
+            description="A pipeline from Claude Code to real design system components (Sail) running on a remote devbox, with one-click Vercel deployment for external sharing. Lets a content designer build production-fidelity prototypes without a local frontend environment or design system setup."
+            details={[
+              "Claude Code → devbox SSH",
+              "real Sail components",
+              "Vercel deploy for sharing",
+              "no local env needed",
+            ]}
+          />
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The problem: prototyping tools (Figma, static mocks) don&rsquo;t capture interaction patterns,
+              real data flows, or component behavior. But setting up a full frontend environment is a
+              multi-hour yak shave for someone whose primary tool is language, not webpack.
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              This workflow eliminates that gap. Claude Code writes components using the real design system,
+              runs them on a remote devbox (bypassing local setup entirely), and deploys to Vercel for
+              stakeholder review. The prototype the billing IA case study references was built this way —
+              real components, real interactions, deployed in under an hour.
+            </p>
+          </div>
+        </section>
+
+        {/* Thread */}
+        <section>
+          <SectionLabel>the thread</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              These projects share a thesis: the best developer tooling doesn&rsquo;t abstract
+              away complexity — it makes the right information available at the right moment so you
+              can make better decisions faster. Strata does this for work context. Greenlight does
+              it for shipping readiness. The memory system does it for conversational continuity.
+            </p>
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              As a content designer who ships code, these tools represent the same practice applied
+              reflexively: designing systems that reduce cognitive load and surface what matters.
+              The medium is different (Swift, Claude skills, deployment pipelines) but the job is the same.
+            </p>
+          </div>
+        </section>
+
+        <footer className="pt-8 border-t border-[var(--border)]">
+          <p className="text-xs font-mono text-[var(--muted)] opacity-50">
+            // all tools actively used · strata shared internally at stripe
+          </p>
+        </footer>
+      </main>
     </div>
   );
 }

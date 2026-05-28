@@ -28,11 +28,12 @@ export const projects: Project[] = [
     tags: ["Automation", "Ops tooling", "Content systems", "LLM"],
   },
   {
-    slug: "placeholder-1",
-    title: "Case study coming soon",
-    description: "Details to be added.",
-    role: "—",
-    year: "—",
-    tags: [],
+    slug: "skills-personal-software",
+    title: "Skills & personal software",
+    description:
+      "Side projects and Claude-native tooling — building context-aware software for myself and shipping reusable patterns for others.",
+    role: "Designer + engineer",
+    year: "2025–2026",
+    tags: ["Swift", "Claude Code", "Automation", "Side projects"],
   },
 ];

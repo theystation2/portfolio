@@ -25,7 +25,7 @@ export default function Home() {
             </p>
             <p className="mt-2 text-sm text-[var(--muted)] max-w-lg leading-relaxed">
               Currently at Stripe, working on billing, developer tools, and
-              operational automation. Building for a future where consumers are
+              operational automation. Building for a future where users are
               sometimes human and sometimes machine.
             </p>
           </div>
@@ -51,6 +51,13 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             linkedin
+          </a>
+          <span className="text-[var(--border)]">/</span>
+          <a
+            href="/resume"
+            className="text-[var(--accent)] hover:text-[var(--accent-warm)] transition-colors"
+          >
+            resume
           </a>
         </div>
       </header>
