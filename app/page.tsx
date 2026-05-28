@@ -71,16 +71,12 @@ export default function Home() {
             <div className="flex-1 h-px bg-[var(--border)]" />
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-x-8 gap-y-6">
-            <div className="space-y-3">
-              <div className="space-y-2">
-                <SchemaLine k="experience" v="10+ years" />
-                <SchemaLine k="location" v="montreal" />
-                <SchemaLine k="education" v="phd, english literature" />
-              </div>
-              <div className="space-y-2">
-                <SchemaLine k="passions" v="animals, literacy" />
-                <SchemaLine k="why_good" v="i genuinely, genuinely care" />
-              </div>
+            <div className="flex flex-col gap-1.5">
+              <div className="block"><SchemaLine k="experience" v="10+ years" /></div>
+              <div className="block"><SchemaLine k="location" v="montreal" /></div>
+              <div className="block"><SchemaLine k="education" v="phd, english literature" /></div>
+              <div className="block mt-2"><SchemaLine k="passions" v="animals, literacy" /></div>
+              <div className="block"><SchemaLine k="why_good" v="i genuinely, genuinely care" /></div>
             </div>
             <div className="flex flex-col items-center gap-2">
               <span className="text-[10px] font-mono text-[var(--muted)] opacity-60">
