@@ -982,6 +982,55 @@ function StringsContentProjects({ project }: { project: typeof projects[number] 
           </div>
         </section>
 
+        {/* Voice & tone meta-analysis */}
+        <section>
+          <SectionLabel>voice &amp; tone meta-analysis</SectionLabel>
+          <SkillCard
+            title="Cross-product voice & tone research synthesis"
+            type="meta-analysis"
+            description="A synthesis of all existing tone and voice research across Stripe — pulling from 12 product-area content audits, 18 Dovetail research queries, and participant verbatims — to identify the five systemic voice failures that no single product study had surfaced individually."
+            details={[
+              "12 product areas",
+              "18 Dovetail queries",
+              "5 systemic findings",
+              "3-tone recommendation",
+            ]}
+          />
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The five findings: Stripe is <em>non-committal where it should be opinionated</em> (users
+              want guidance, not options menus). <em>Clinical where it should be empathetic</em> (risk
+              comms arrive without emotional acknowledgment). <em>Softened where it should be direct</em>
+              (sugarcoating backfires — tested and confirmed in research). <em>Inauthentically positive
+              in low-stakes contexts</em> (performative warmth undermines trust). And <em>register-inconsistent
+              across surfaces</em> (legal says one thing, dashboard says another, emails say a third).
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The key participant quote that crystallizes the problem: &ldquo;I use a daily payout because
+              I don&rsquo;t trust Stripe for keeping money. I learned about how Stripe blocks user accounts
+              from Twitter.&rdquo; Silence is a tone choice — absence of proactive communication reads
+              as indifference.
+            </p>
+          </div>
+          <div className="mt-4 bg-[var(--surface)] border border-[var(--border)] rounded-xl p-5">
+            <div className="text-[10px] font-mono uppercase tracking-wide text-[var(--muted)] mb-3">Findings summary</div>
+            <div className="space-y-2 text-xs text-[var(--muted)]">
+              {[
+                { finding: "Non-committal where it should be opinionated", dimension: "Authority" },
+                { finding: "Clinical where it should be empathetic", dimension: "Emotional register" },
+                { finding: "Softened where it should be direct", dimension: "Directness" },
+                { finding: "Inauthentically positive in low-stakes contexts", dimension: "Authenticity" },
+                { finding: "Register-inconsistent across surfaces", dimension: "Consistency" },
+              ].map((f) => (
+                <div key={f.dimension} className="flex items-start gap-3">
+                  <span className="text-[var(--accent)] shrink-0 text-[10px] font-mono w-20">{f.dimension}</span>
+                  <span>{f.finding}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
         {/* Thread */}
         <section>
           <SectionLabel>the thread</SectionLabel>
