@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { projects } from "@/lib/projects";
 
@@ -69,15 +70,29 @@ export default function Home() {
             </h2>
             <div className="flex-1 h-px bg-[var(--border)]" />
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3">
-            <div className="space-y-2">
-              <SchemaLine k="experience" v="10+ years" />
-              <SchemaLine k="location" v="montreal" />
-              <SchemaLine k="education" v="phd, english literature" />
+          <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-x-8 gap-y-6">
+            <div className="space-y-3">
+              <div className="space-y-2">
+                <SchemaLine k="experience" v="10+ years" />
+                <SchemaLine k="location" v="montreal" />
+                <SchemaLine k="education" v="phd, english literature" />
+              </div>
+              <div className="space-y-2">
+                <SchemaLine k="passions" v="animals, literacy" />
+                <SchemaLine k="why_good" v="i genuinely, genuinely care" />
+              </div>
             </div>
-            <div className="space-y-2">
-              <SchemaLine k="passions" v="animals, literacy" />
-              <SchemaLine k="why_good" v="i genuinely, genuinely care" />
+            <div className="flex flex-col items-center gap-2">
+              <span className="text-[10px] font-mono text-[var(--muted)] opacity-60">
+                what my colleagues think of me:
+              </span>
+              <Image
+                src="/colleagues.jpg"
+                alt="AI-generated claymation portrait surrounded by cats in hats"
+                width={180}
+                height={180}
+                className="rounded-xl border border-[var(--border)] shadow-lg"
+              />
             </div>
           </div>
         </section>
