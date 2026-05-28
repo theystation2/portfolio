@@ -83,9 +83,9 @@ export default function ResumePage() {
           <SectionLabel>experience</SectionLabel>
 
           <Role
-            title="Senior Content Designer"
+            title="Staff Content Designer"
             company="Stripe"
-            period="2022 – present"
+            period="Aug 2024 – present"
             description="Content design lead for billing, tax, reporting, and accounting. Information architecture, content systems, and operational automation."
             highlights={[
               "Led billing IA redesign — navigation principles, object placement, and agent-ready overview surfaces",
@@ -98,38 +98,52 @@ export default function ResumePage() {
           />
 
           <Role
+            title="Content Designer"
+            company="Stripe"
+            period="Aug 2022 – Aug 2024"
+            description="Content design for Revenue & Finance Automation. Billing, tax, reporting, Sigma, and accounting surfaces."
+          />
+
+          <Role
+            title="Senior Content Designer"
+            company="Wealthsimple"
+            period="Aug 2021 – Jul 2022"
+            description="Content design for fintech products — investing, savings, and tax filing. Writing for complex financial concepts in a consumer-friendly register."
+          />
+
+          <Role
             title="Senior Content Designer"
             company="Shopify"
-            period="2020 – 2022"
-            description="Content design for core commerce surfaces. Focused on merchant-facing admin, checkout, and payments experiences."
-            highlights={[
-              "Information architecture and content strategy for merchant admin",
-              "UX writing across checkout, payments, and shipping flows",
-              "Contributed to Polaris design system content guidelines",
-            ]}
+            period="Mar 2021 – Aug 2021"
+            description="Content design for core commerce surfaces. Merchant-facing admin, checkout, and payments."
           />
 
           <Role
             title="Content Designer"
-            company="Wealthsimple"
-            period="2019 – 2020"
-            description="Content design for fintech products — investing, savings, and tax filing. Writing for complex financial concepts in a consumer-friendly register."
-            highlights={[
-              "UX writing for investing flows, account onboarding, and tax product",
-              "Established content patterns for financial literacy and regulatory disclosure",
-            ]}
+            company="Shopify"
+            period="Nov 2019 – Mar 2021"
+            description="Internal research, experience mapping, workflow development, prototyping, content best-practices, taxonomies, hierarchies, and knowledge management."
           />
 
           <Role
-            title="Content Designer / Writing Instructor"
+            title="Content Strategist — Knowledge Management"
+            company="Shopify"
+            period="Jan 2017 – Nov 2019"
+            description="Content design for internal tooling — wikis, support information, support tooling such as chat and call functionality."
+          />
+
+          <Role
+            title="Adjunct Professor"
             company="University of Ottawa"
-            period="2016 – 2019"
-            description="Dual role: taught university-level writing and rhetoric while completing doctoral research. Designed curriculum for undergraduate writing courses and contributed to departmental content and communications."
-            highlights={[
-              "Taught academic writing, rhetoric, and literary analysis",
-              "Designed course materials and assessment frameworks",
-              "Doctoral research in English literature (American transcendentalism)",
-            ]}
+            period="Sep 2016 – Jan 2020"
+            description="Taught university-level writing, rhetoric, and literary analysis while completing doctoral research in English literature."
+          />
+
+          <Role
+            title="Graduate Teaching Assistant"
+            company="University of Ottawa"
+            period="Sep 2014 – Nov 2019"
+            description="Teaching assistant for undergraduate English and writing courses throughout doctoral program."
           />
         </section>
 
@@ -140,15 +154,8 @@ export default function ResumePage() {
           <Role
             title="PhD, English Literature"
             company="University of Ottawa"
-            period="2016 – 2019"
+            period="2014 – 2020"
             description="Doctoral research in American transcendentalism. Focus on rhetoric, language philosophy, and the relationship between form and meaning."
-          />
-
-          <Role
-            title="Earlier education"
-            company="United Kingdom"
-            period="prior to 2016"
-            description="Undergraduate and postgraduate study in English literature before relocating to Canada."
           />
         </section>
 
