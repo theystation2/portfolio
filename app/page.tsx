@@ -24,9 +24,8 @@ export default function Home() {
               Content designer. 10+ years. Based in Montreal.
             </p>
             <p className="mt-2 text-sm text-[var(--muted)] max-w-lg leading-relaxed">
-              Currently at Stripe, working on billing, developer tools, and
-              operational automation. Building for a future where users are
-              sometimes human and sometimes machine.
+              This portfolio is as machine-readable as it is human-readable.
+              Design choices are intended for both audiences.
             </p>
           </div>
           <div className="hidden sm:flex flex-col gap-1 pt-2 shrink-0 text-right">
