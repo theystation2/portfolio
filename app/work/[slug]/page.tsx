@@ -38,6 +38,10 @@ export default async function WorkPage({
     return <SkillsPersonalSoftware project={project} />;
   }
 
+  if (project.slug === "strings-content-projects") {
+    return <StringsContentProjects project={project} />;
+  }
+
   return (
     <div className="flex flex-col flex-1">
       <header className="w-full max-w-3xl mx-auto px-6 pt-16 pb-8">
@@ -694,6 +698,88 @@ function SkillsPersonalSoftware({ project }: { project: typeof projects[number] 
           </div>
         </section>
 
+        {/* Dante eval */}
+        <section>
+          <SectionLabel>dante rule evaluation framework</SectionLabel>
+          <SkillCard
+            title="Dante eval"
+            type="Claude skill"
+            description="A structured evaluation harness for testing proposed UX writing rule changes against a live corpus. Runs dual-pass rewrites, blinded judge scoring with position-swap debiasing, cluster fixture regression testing, and produces SHIP/REVISE/REJECT recommendations with Cohen's kappa inter-rater reliability."
+            details={[
+              "50-ticket random corpus",
+              "cluster fixture regression",
+              "blinded dual-judge pass",
+              "golden set validation",
+              "automated results logging",
+            ]}
+          />
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The problem: changing a single content rule in a system with 70+ interacting rules
+              can improve one surface while regressing another. Manual review catches obvious
+              regressions but misses interactions between rule clusters (voice vs. brevity,
+              positive framing vs. error clarity, terminology vs. natural language).
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The eval pre-classifies each proposed rule by type and blast radius, selects
+              targeted fixture tickets that exercise known cluster tension points, and runs a
+              blinded judge that scores output quality without knowing which version applied the
+              new rule. Position-swapping across two passes eliminates anchoring bias. A golden
+              set of 16 human-labeled pairs validates the judge&rsquo;s calibration independently.
+            </p>
+          </div>
+        </section>
+
+        {/* Google Docs table writing */}
+        <section>
+          <SectionLabel>google docs table writing</SectionLabel>
+          <SkillCard
+            title="Computed-index table formula"
+            type="guide"
+            description="A mathematical formula for writing tables to Google Docs in a single API call — bypassing the 'insertion index must be inside the bounds of an existing paragraph' error that blocks standard append operations for table content."
+            details={[
+              "cell_index = table_start + 3 + row*(cols*2+1) + col*2",
+              "2 API calls total",
+              "no intermediate reads",
+              "deterministic cell layout",
+            ]}
+          />
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              Google Docs API&rsquo;s append operations fail on tables. The workaround: empty tables
+              have deterministic internal structure, so you can compute every cell&rsquo;s character
+              index mathematically and populate the entire table in a single batch — insert the table
+              structure, then fill all cells with reversed-index text operations. No need to read the
+              document back between steps.
+            </p>
+          </div>
+        </section>
+
+        {/* Personal productivity dashboard */}
+        <section>
+          <SectionLabel>personal productivity dashboard</SectionLabel>
+          <SkillCard
+            title="Hubble productivity dashboard"
+            type="guide"
+            description="A self-serve guide for any Stripe employee to build a personal productivity dashboard — 7 widgets covering AI token usage, tool sessions, Jira throughput, PRs merged, meeting load, UCR advisory work, and active coding days. All parameterised by LDAP."
+            details={[
+              "7 SQL widgets",
+              "weekly time-series",
+              "cross-tool activity view",
+              "Kai-automatable refresh",
+            ]}
+          />
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              Built to answer the question: &ldquo;what does my work actually look like quantitatively?&rdquo;
+              Particularly useful for content designers and other non-engineering roles where output
+              isn&rsquo;t captured by commit counts alone. The dashboard surfaces AI tool adoption,
+              advisory/review load (Jira comments on others&rsquo; tickets), and meeting burden alongside
+              traditional engineering metrics.
+            </p>
+          </div>
+        </section>
+
         {/* Thread */}
         <section>
           <SectionLabel>the thread</SectionLabel>
@@ -703,6 +789,7 @@ function SkillsPersonalSoftware({ project }: { project: typeof projects[number] 
               away complexity — it makes the right information available at the right moment so you
               can make better decisions faster. Strata does this for work context. Greenlight does
               it for shipping readiness. The memory system does it for conversational continuity.
+              The eval framework does it for rule governance.
             </p>
             <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
               As a content designer who ships code, these tools represent the same practice applied
@@ -715,6 +802,208 @@ function SkillsPersonalSoftware({ project }: { project: typeof projects[number] 
         <footer className="pt-8 border-t border-[var(--border)]">
           <p className="text-xs font-mono text-[var(--muted)] opacity-50">
             // all tools actively used · strata shared internally at stripe
+          </p>
+        </footer>
+      </main>
+    </div>
+  );
+}
+
+function StringsContentProjects({ project }: { project: typeof projects[number] }) {
+  return (
+    <div className="flex flex-col flex-1">
+      <header className="w-full max-w-3xl mx-auto px-6 pt-16 pb-8">
+        <Link
+          href="/"
+          className="text-xs font-mono text-[var(--accent)] hover:text-[var(--accent-warm)] transition-colors mb-8 inline-block"
+        >
+          &larr; index
+        </Link>
+        <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+          {project.title}
+        </h1>
+        <div className="flex flex-wrap gap-x-6 gap-y-2 mt-5 py-4 border-y border-[var(--border)]">
+          <Meta k="role" v={project.role} />
+          <Meta k="year" v={project.year} />
+          <Meta k="tags" v={project.tags.join(", ")} />
+        </div>
+      </header>
+
+      <main className="w-full max-w-3xl mx-auto px-6 pb-24 space-y-12">
+
+        <section>
+          <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+            Content design at scale isn&rsquo;t just writing strings — it&rsquo;s building the systems
+            that ensure thousands of strings stay coherent, evaluable, and improvable over time. These
+            projects span from taxonomic work (what do we call things and why) to automated quality
+            measurement (how do we know if our writing is getting better or worse).
+          </p>
+        </section>
+
+        {/* Label standardization */}
+        <section>
+          <SectionLabel>label standardization</SectionLabel>
+          <SkillCard
+            title="Billing label standardization"
+            type="content system"
+            description="A taxonomy and governance framework for every label type in the Stripe Dashboard — action filters, filters, columns, badges, and signposts. Established naming principles, character limits, and consistency rules across 10,000+ strings spanning billing, payments, connect, and checkout surfaces."
+            details={[
+              "5 label types defined",
+              "per-type character limits",
+              "Sail guide published",
+              "cross-surface audit",
+            ]}
+          />
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The problem: labels across the dashboard had grown organically. The same concept used
+              different names in different surfaces. Filters didn&rsquo;t map to badges. Column headers
+              inherited API field names verbatim. Action filters used inconsistent grammar (some nouns,
+              some verbs, some adjectives).
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The output was three-part: a recommendations doc establishing principles (clear, connected,
+              consistent), a Sail guide giving engineers actionable rules per component type, and a
+              spreadsheet auditing existing labels against the standard. The principles: labels must work
+              standalone (clear), map to sibling elements on the same page (connected), and match identical
+              concepts used elsewhere in the product (consistent).
+            </p>
+          </div>
+          <div className="mt-4 bg-[var(--surface)] border border-[var(--border)] rounded-xl p-5">
+            <div className="text-[10px] font-mono uppercase tracking-wide text-[var(--muted)] mb-3">Example rules</div>
+            <div className="space-y-2 text-xs text-[var(--muted)]">
+              <div className="flex gap-3">
+                <span className="text-[var(--accent)] shrink-0">Action filters:</span>
+                <span>35 chars max, 1–2 words, must include noun, first filter always &ldquo;All [noun]&rdquo;</span>
+              </div>
+              <div className="flex gap-3">
+                <span className="text-[var(--accent)] shrink-0">Filters:</span>
+                <span>20 chars for readability / 33 max, 4 words or less, alphabetized, don&rsquo;t inherit API titles</span>
+              </div>
+              <div className="flex gap-3">
+                <span className="text-[var(--accent)] shrink-0">Badges:</span>
+                <span>Nouns only, map to filter/action filter for continuity, refer to object status not Stripe actions</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Golden sets */}
+        <section>
+          <SectionLabel>golden sets &amp; quality evaluation</SectionLabel>
+          <SkillCard
+            title="UCR golden set validation"
+            type="evaluation system"
+            description="A calibration framework for automated content quality judges — 16 human-labeled copy pairs (6 improvements, 4 equivalents, 6 synthetic regressions) drawn from real communications review data. Measures whether an LLM judge can reliably discriminate copy quality against human ground truth, producing Cohen's kappa as the health metric."
+            details={[
+              "16 labeled pairs",
+              "3 verdict categories",
+              "Cohen's kappa scoring",
+              "monthly health checks",
+              "synthetic regression pairs",
+            ]}
+          />
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              If you&rsquo;re using an LLM to evaluate content quality, you need to know whether the
+              judge itself is reliable. The golden set answers this: run the judge against pairs where
+              a human content designer already determined the quality delta, and measure agreement.
+              If kappa drops below 0.4, the judge needs recalibration before any eval results can be trusted.
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The synthetic regression pairs are constructed by inverting soft improvements (delta +2 or +3) —
+              presenting the approved copy as baseline and the weaker submitted version as the &ldquo;proposed
+              change.&rdquo; This tests the judge&rsquo;s sensitivity to quality decreases, not just its
+              ability to spot improvements.
+            </p>
+          </div>
+        </section>
+
+        {/* Voice audit */}
+        <section>
+          <SectionLabel>sentence-level voice audit</SectionLabel>
+          <SkillCard
+            title="200-string voice audit across 8 product areas"
+            type="audit"
+            description="A quantitative voice analysis scoring ~200 sentences from the Stripe codebase against 8 dimensions (active voice, clarity, positive framing, tone match, directness, empathy, authority, personality). Surfaced systematic patterns: passive voice concentrates in risk/compliance, empathy appears only in success states, and zero consistent personality exists across content types."
+            details={[
+              "200 sentences sampled",
+              "8 product areas",
+              "8 scoring dimensions",
+              "Dante-scored + annotated",
+            ]}
+          />
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The audit revealed that Stripe doesn&rsquo;t have one voice — it has two strong personalities
+              (warm/confident onboarding, clinical/passive risk) and then a large middle that defaults
+              to neutral system-speak. The key finding: Stripe uses active voice for good news and
+              passive voice for bad news. This is precisely backwards — bad news requires more clarity,
+              not less.
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The recommendation: define three tones rather than one voice. <em>Utility</em> for task-focused
+              surfaces where personality adds noise. <em>Advisor</em> for choice points where users
+              need opinionated guidance. <em>Candor</em> for negative states where directness and empathy
+              matter most. The failure mode being addressed: risk and error surfaces default to utility
+              tone when they need candor.
+            </p>
+          </div>
+          <div className="mt-4 bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden">
+            <div className="px-5 py-3 border-b border-[var(--border)]">
+              <span className="text-[10px] font-mono uppercase tracking-wide text-[var(--muted)]">Score summary (subset)</span>
+            </div>
+            <table className="w-full text-[11px]">
+              <thead>
+                <tr className="border-b border-[var(--border)]">
+                  <th className="text-left px-5 py-2 font-mono text-[10px] text-[var(--muted)] uppercase tracking-wide">Surface</th>
+                  <th className="text-left px-5 py-2 font-mono text-[10px] text-[var(--muted)] uppercase tracking-wide">Active</th>
+                  <th className="text-left px-5 py-2 font-mono text-[10px] text-[var(--muted)] uppercase tracking-wide">Empathy</th>
+                  <th className="text-left px-5 py-2 font-mono text-[10px] text-[var(--muted)] uppercase tracking-wide">Personality</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  { surface: "Onboarding flows", active: "3/3", empathy: "3/3", personality: "3/3" },
+                  { surface: "Emails (positive)", active: "3/3", empathy: "3/3", personality: "3/3" },
+                  { surface: "Billing overview", active: "3/3", empathy: "1/3", personality: "2/3" },
+                  { surface: "Risk/compliance", active: "1/3", empathy: "0/3", personality: "0/3" },
+                  { surface: "Error states", active: "1/3", empathy: "0/3", personality: "0/3" },
+                ].map((r) => (
+                  <tr key={r.surface} className="border-b border-[var(--border)] last:border-0">
+                    <td className="px-5 py-2 text-[var(--foreground)]">{r.surface}</td>
+                    <td className="px-5 py-2 text-[var(--muted)]">{r.active}</td>
+                    <td className="px-5 py-2 text-[var(--muted)]">{r.empathy}</td>
+                    <td className="px-5 py-2 text-[var(--muted)]">{r.personality}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* Thread */}
+        <section>
+          <SectionLabel>the thread</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              These projects span four years but share a posture: content design is systems work.
+              Labels aren&rsquo;t just words — they&rsquo;re a wayfinding layer that breaks when
+              inconsistent. Voice isn&rsquo;t just tone — it&rsquo;s a measurable quality dimension
+              with systematic failure patterns. Evaluation isn&rsquo;t just review — it&rsquo;s an
+              infrastructure problem that needs calibration, regression testing, and reliability metrics.
+            </p>
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              The through-line: treating content decisions as engineering problems that deserve
+              the same rigor — version control, automated testing, quantitative measurement,
+              and principled governance.
+            </p>
+          </div>
+        </section>
+
+        <footer className="pt-8 border-t border-[var(--border)]">
+          <p className="text-xs font-mono text-[var(--muted)] opacity-50">
+            // label guide shipped to sail · voice audit informing 2026 tone guidelines · eval framework in production
           </p>
         </footer>
       </main>

@@ -36,4 +36,13 @@ export const projects: Project[] = [
     year: "2025–2026",
     tags: ["Swift", "Claude Code", "Automation", "Side projects"],
   },
+  {
+    slug: "strings-content-projects",
+    title: "Strings & other content projects",
+    description:
+      "Systems-level content work — from standardizing 10,000+ dashboard labels to building automated voice audits and quality evaluation infrastructure.",
+    role: "Content design lead",
+    year: "2023–2026",
+    tags: ["Voice", "Labels", "Evaluation", "Systems"],
+  },
 ];
