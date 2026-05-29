@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { WhimsyButton } from "@/components/WhimsyButton";
 import { ModeSwitcher } from "@/components/ModeSwitcher";
+import { CatMode } from "@/components/CatMode";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -80,6 +81,7 @@ export default function RootLayout({
         />
         <ModeSwitcher />
         {children}
+        <CatMode />
         <ThemeToggle />
         <WhimsyButton />
       </body>
