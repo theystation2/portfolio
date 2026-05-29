@@ -92,6 +92,18 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="mb-16">
+          <div className="flex items-center gap-3 mb-6">
+            <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--muted)]">
+              portfolio_info
+            </h2>
+            <div className="flex-1 h-px bg-[var(--border)]" />
+          </div>
+          <p className="text-sm text-[var(--muted)] leading-relaxed">
+            This site is in constant development. It serves two purposes: a living record of my work experience, and a testbed for AI and web dev tooling. Expect it to change frequently.
+          </p>
+        </section>
+
         <div className="flex items-center gap-3 mb-8">
           <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--muted)]">
             selected_work
