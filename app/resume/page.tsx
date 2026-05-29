@@ -86,7 +86,7 @@ export default function ResumePage() {
             title="Staff Content Designer"
             company="Stripe"
             period="Aug 2024 – present"
-            description="Content design lead for billing, tax, reporting, and accounting. Information architecture, content systems, and operational automation."
+            description="Design lead for billing, tax, reporting, and accounting. Information architecture, content systems, and operational automation."
             highlights={[
               "Led billing IA redesign — navigation principles, object placement, and agent-ready overview surfaces",
               "Designed automated communications triage system — LLM-evaluated pipeline replacing manual review",
@@ -101,21 +101,21 @@ export default function ResumePage() {
             title="Content Designer"
             company="Stripe"
             period="Aug 2022 – Aug 2024"
-            description="Content design for Revenue & Finance Automation. Billing, tax, reporting, Sigma, and accounting surfaces."
+            description="Design for Revenue & Finance Automation. Billing, tax, reporting, Sigma, and accounting surfaces."
           />
 
           <Role
             title="Senior Content Designer"
             company="Wealthsimple"
             period="Aug 2021 – Jul 2022"
-            description="Content design for fintech products — investing, savings, and tax filing. Writing for complex financial concepts in a consumer-friendly register."
+            description="Design for fintech products — investing, savings, and tax filing. Writing for complex financial concepts in a consumer-friendly register."
           />
 
           <Role
             title="Senior Content Designer"
             company="Shopify"
             period="Mar 2021 – Aug 2021"
-            description="Content design for core commerce surfaces. Merchant-facing admin, checkout, and payments."
+            description="Design for core commerce surfaces. Merchant-facing admin, checkout, and payments."
           />
 
           <Role
@@ -129,7 +129,7 @@ export default function ResumePage() {
             title="Content Strategist — Knowledge Management"
             company="Shopify"
             period="Jan 2017 – Nov 2019"
-            description="Content design for internal tooling — wikis, support information, support tooling such as chat and call functionality."
+            description="Design for internal tooling — wikis, support information, support tooling such as chat and call functionality."
           />
 
           <Role

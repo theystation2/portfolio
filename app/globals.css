@@ -125,6 +125,28 @@ body {
   background: rgba(167, 139, 250, 0.3);
 }
 
+/* Reduced motion — respects user toggle and OS preference */
+
+[data-reduced-motion="true"] *,
+[data-reduced-motion="true"] *::before,
+[data-reduced-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :not([data-reduced-motion]) *,
+  :not([data-reduced-motion]) *::before,
+  :not([data-reduced-motion]) *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* WHIMSY MODE — everything dialed to 11 */
 
 @keyframes rainbow {

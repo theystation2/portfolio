@@ -21,7 +21,7 @@ export default function Home() {
               Jack Horton
             </h1>
             <p className="mt-4 text-lg text-[var(--foreground)] opacity-90 max-w-lg leading-relaxed">
-              Content designer. 10+ years. Based in Montreal.
+              Designer. 10+ years. Based in Montreal.
             </p>
             <p className="mt-2 text-sm text-[var(--muted)] max-w-lg leading-relaxed">
               This portfolio is as machine-readable as it is human-readable.
@@ -29,7 +29,7 @@ export default function Home() {
             </p>
           </div>
           <div className="hidden sm:flex flex-col gap-1 pt-2 shrink-0 text-right">
-            <SchemaLine k="role" v="content designer" />
+            <SchemaLine k="role" v="designer" />
             <SchemaLine k="org" v="stripe" />
             <SchemaLine k="focus" v="[billing, devtools, ops]" />
             <SchemaLine k="status" v="employed / available" />

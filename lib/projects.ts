@@ -14,7 +14,7 @@ export const projects: Project[] = [
     title: "Billing information architecture",
     description:
       "Redesigning how operators navigate billing — from fragmented surfaces to a principled IA with workload-based tabs and agent-ready overviews.",
-    role: "Content design lead",
+    role: "Design lead",
     year: "2026",
     tags: ["IA", "Navigation", "UBB", "Agents"],
   },
@@ -23,7 +23,7 @@ export const projects: Project[] = [
     title: "User communications review automation",
     description:
       "Designing the content and interaction model for automated triage of user-facing communications at scale — shifting a manual review process into a principled automation system.",
-    role: "Content design + systems",
+    role: "Design + systems",
     year: "2026",
     tags: ["Automation", "Ops tooling", "Content systems", "LLM"],
   },
@@ -41,7 +41,7 @@ export const projects: Project[] = [
     title: "Strings & other content projects",
     description:
       "Systems-level content work — from standardizing 10,000+ dashboard labels to building automated voice audits and quality evaluation infrastructure.",
-    role: "Content design lead",
+    role: "Design lead",
     year: "2023–2026",
     tags: ["Voice", "Labels", "Evaluation", "Systems"],
   },

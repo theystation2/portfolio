@@ -491,7 +491,7 @@ function BeforeAfterViz() {
       <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-5">
         <div className="text-[10px] font-mono uppercase tracking-wide text-[var(--accent-warm)] mb-3">Before</div>
         <ul className="space-y-2 text-xs text-[var(--muted)]">
-          <li className="flex gap-2"><span className="opacity-40">·</span> Manual triage by content designers</li>
+          <li className="flex gap-2"><span className="opacity-40">·</span> Manual triage by designers</li>
           <li className="flex gap-2"><span className="opacity-40">·</span> Tickets sit in queue for hours/days</li>
           <li className="flex gap-2"><span className="opacity-40">·</span> No consistent classification criteria</li>
           <li className="flex gap-2"><span className="opacity-40">·</span> Reviewer context-switches constantly</li>
@@ -675,7 +675,7 @@ function SkillsPersonalSoftware({ project }: { project: typeof projects[number] 
           <SkillCard
             title="Rapid prototyping workflow"
             type="workflow"
-            description="A pipeline from Claude Code to real design system components (Sail) running on a remote devbox, with one-click Vercel deployment for external sharing. Lets a content designer build production-fidelity prototypes without a local frontend environment or design system setup."
+            description="A pipeline from Claude Code to real design system components (Sail) running on a remote devbox, with one-click Vercel deployment for external sharing. Lets a designer build production-fidelity prototypes without a local frontend environment or design system setup."
             details={[
               "Claude Code → devbox SSH",
               "real Sail components",
@@ -772,7 +772,7 @@ function SkillsPersonalSoftware({ project }: { project: typeof projects[number] 
           <div className="mt-4 space-y-3">
             <p className="text-sm text-[var(--muted)] leading-relaxed">
               Built to answer the question: &ldquo;what does my work actually look like quantitatively?&rdquo;
-              Particularly useful for content designers and other non-engineering roles where output
+              Particularly useful for designers and other non-engineering roles where output
               isn&rsquo;t captured by commit counts alone. The dashboard surfaces AI tool adoption,
               advisory/review load (Jira comments on others&rsquo; tickets), and meeting burden alongside
               traditional engineering metrics.
@@ -792,7 +792,7 @@ function SkillsPersonalSoftware({ project }: { project: typeof projects[number] 
               The eval framework does it for rule governance.
             </p>
             <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
-              As a content designer who ships code, these tools represent the same practice applied
+              As a designer who ships code, these tools represent the same practice applied
               reflexively: designing systems that reduce cognitive load and surface what matters.
               The medium is different (Swift, Claude skills, deployment pipelines) but the job is the same.
             </p>
@@ -833,7 +833,7 @@ function StringsContentProjects({ project }: { project: typeof projects[number] 
 
         <section>
           <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
-            Content design at scale isn&rsquo;t just writing strings — it&rsquo;s building the systems
+            Design at scale isn&rsquo;t just writing strings — it&rsquo;s building the systems
             that ensure thousands of strings stay coherent, evaluable, and improvable over time. These
             projects span from taxonomic work (what do we call things and why) to automated quality
             measurement (how do we know if our writing is getting better or worse).
@@ -907,7 +907,7 @@ function StringsContentProjects({ project }: { project: typeof projects[number] 
             <p className="text-sm text-[var(--muted)] leading-relaxed">
               If you&rsquo;re using an LLM to evaluate content quality, you need to know whether the
               judge itself is reliable. The golden set answers this: run the judge against pairs where
-              a human content designer already determined the quality delta, and measure agreement.
+              a human designer already determined the quality delta, and measure agreement.
               If kappa drops below 0.4, the judge needs recalibration before any eval results can be trusted.
             </p>
             <p className="text-sm text-[var(--muted)] leading-relaxed">
@@ -1036,7 +1036,7 @@ function StringsContentProjects({ project }: { project: typeof projects[number] 
           <SectionLabel>the thread</SectionLabel>
           <div className="space-y-4">
             <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
-              These projects span four years but share a posture: content design is systems work.
+              These projects span four years but share a posture: design is systems work.
               Labels aren&rsquo;t just words — they&rsquo;re a wayfinding layer that breaks when
               inconsistent. Voice isn&rsquo;t just tone — it&rsquo;s a measurable quality dimension
               with systematic failure patterns. Evaluation isn&rsquo;t just review — it&rsquo;s an
@@ -1094,7 +1094,7 @@ function UCRTriageCaseStudy({ project }: { project: typeof projects[number] }) {
               hundreds of communications are created or modified weekly across dozens of product teams.
             </p>
             <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
-              The content design team was the bottleneck. Every ticket landed in the same queue,
+              The design team was the bottleneck. Every ticket landed in the same queue,
               regardless of complexity. A one-word copy change sat alongside a full regulatory
               rewrite. Triage was manual, inconsistent, and ate into the time designers could
               spend on actual design work.
@@ -1123,9 +1123,9 @@ function UCRTriageCaseStudy({ project }: { project: typeof projects[number] }) {
           <SectionLabel>approach</SectionLabel>
           <div className="space-y-4">
             <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
-              I treated this as a content design problem first and an engineering problem second.
+              I treated this as a design problem first and an engineering problem second.
               The core question wasn&rsquo;t &ldquo;can we use an LLM to read tickets&rdquo; — it was
-              &ldquo;what are the actual decision criteria that a skilled content designer applies
+              &ldquo;what are the actual decision criteria that a skilled designer applies
               when triaging, and can we codify them?&rdquo;
             </p>
             <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
@@ -1183,7 +1183,7 @@ function UCRTriageCaseStudy({ project }: { project: typeof projects[number] }) {
               <p className="text-xs text-[var(--muted)] leading-relaxed">
                 The team&rsquo;s implicit triage criteria were codified into structured evaluation rules
                 rather than freeform prompt instructions. This makes them auditable, versionable, and
-                testable — a content designer can read the rules and verify they match team practice
+                testable — a designer can read the rules and verify they match team practice
                 without understanding the underlying model.
               </p>
             </div>
@@ -1212,19 +1212,19 @@ function UCRTriageCaseStudy({ project }: { project: typeof projects[number] }) {
           </div>
         </section>
 
-        {/* Content design angle */}
+        {/* Design angle */}
         <section>
-          <SectionLabel>the content design angle</SectionLabel>
+          <SectionLabel>the design angle</SectionLabel>
           <div className="space-y-4">
             <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
-              This project reframes what &ldquo;content design&rdquo; means in an era of automation.
-              The traditional framing: content designers write and review copy. The expanded framing:
-              content designers define the rules by which language is evaluated, classified, and routed —
+              This project reframes what &ldquo;design&rdquo; means in an era of automation.
+              The traditional framing: designers write and review copy. The expanded framing:
+              designers define the rules by which language is evaluated, classified, and routed —
               whether those rules are applied by a person or a machine.
             </p>
             <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
-              The LLM is not replacing the content designer. It&rsquo;s executing the content
-              designer&rsquo;s judgment at scale. The designer&rsquo;s job shifts upstream: from
+              The LLM is not replacing the designer. It&rsquo;s executing the designer&rsquo;s
+              judgment at scale. The designer&rsquo;s job shifts upstream: from
               &ldquo;review this ticket&rdquo; to &ldquo;define what good review looks like and
               verify the system applies it correctly.&rdquo;
             </p>
