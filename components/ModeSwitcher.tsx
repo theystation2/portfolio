@@ -12,7 +12,7 @@ const modeLabels: Record<Mode, string> = {
 
 const modeDescriptions: Record<Mode, string> = {
   minimalist: "Efficient, structured, schema-driven.",
-  maximalist: "Dense, vibrant, beauty for beauty.",
+  maximalist: "Dense, vibrant, fun for fun.",
   agent: "Machine-parseable, RAG-structured.",
 };
 
