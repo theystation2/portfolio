@@ -490,12 +490,11 @@ body {
 }
 
 [data-mode="agent"] .agent-meta::before {
-  content: "⬡ STRUCTURED DATA — visible to crawlers, ATS, and LLM agents via JSON-LD + data attributes";
+  content: "@context: schema.org/Person";
   display: block;
   color: var(--accent);
   font-size: 9px;
   letter-spacing: 0.05em;
-  text-transform: uppercase;
   margin-bottom: 0.75rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px dashed var(--border);
@@ -516,28 +515,7 @@ body {
   line-height: 1.8;
 }
 
-/* Agent mode: annotations and callouts for humans */
-
-[data-mode="agent"] h1::after {
-  content: "← grep: name, heading level 1";
-  font-size: 9px;
-  color: var(--accent-cool);
-  opacity: 0.7;
-  margin-left: 1rem;
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
-}
-
-[data-mode="agent"] h2::after {
-  content: " ← section delimiter";
-  font-size: 9px;
-  color: var(--accent-cool);
-  opacity: 0.6;
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
-}
+/* Agent mode: structural markers (machine-parseable tokens only in pseudo-elements) */
 
 [data-mode="agent"] section {
   position: relative;
@@ -547,24 +525,48 @@ body {
 }
 
 [data-mode="agent"] section::before {
-  content: "--- # section boundary (parseable)";
+  content: "---";
   display: block;
   font-family: var(--font-geist-mono), monospace;
   font-size: 9px;
   color: var(--muted);
   margin-bottom: 0.75rem;
+}
+
+[data-mode="agent"] img {
+  outline: 1px dashed var(--muted) !important;
+  outline-offset: 4px;
+}
+
+/* Agent mode: human-facing annotations (DOM elements, aria-hidden, not in text extraction) */
+
+[data-mode="agent"] .agent-annotation {
+  display: inline-block !important;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  color: var(--accent-cool);
+  opacity: 0.7;
+  pointer-events: none;
+  user-select: none;
+}
+
+[data-mode="agent"] .agent-annotation-block {
+  display: block !important;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  color: var(--accent-cool);
+  opacity: 0.6;
   padding: 2px 6px;
   background: var(--surface);
   border: 1px solid var(--border);
   width: fit-content;
+  margin-bottom: 0.5rem;
+  pointer-events: none;
+  user-select: none;
 }
 
-[data-mode="agent"] [class*="rounded-xl"] {
-  position: relative;
-}
-
-[data-mode="agent"] [class*="rounded-xl"]::after {
-  content: "⬡ card: semantic block";
+[data-mode="agent"] .agent-annotation-float {
+  display: block !important;
   position: absolute;
   top: -8px;
   right: 8px;
@@ -574,52 +576,14 @@ body {
   background: var(--background);
   padding: 0 4px;
   opacity: 0.7;
+  pointer-events: none;
+  user-select: none;
 }
 
-[data-mode="agent"] a {
-  position: relative;
-}
-
-[data-mode="agent"] [class*="border-y"]::before {
-  content: "┄┄┄ metadata row ┄┄┄";
-  display: block;
-  font-size: 8px;
-  color: var(--muted);
-  opacity: 0.5;
-  margin-bottom: 4px;
-}
-
-[data-mode="agent"] footer {
-  position: relative;
-}
-
-[data-mode="agent"] footer::after {
-  content: "↑ tokens above this line are indexable content · below is chrome";
-  display: block;
-  font-size: 9px;
-  color: var(--accent-cool);
-  opacity: 0.5;
-  margin-top: 0.5rem;
-}
-
-[data-mode="agent"] [class*="tag"] {
-  position: relative;
-}
-
-[data-mode="agent"] [class*="tag-bg"]::before {
-  content: "⊕";
-  margin-right: 2px;
-  opacity: 0.5;
-}
-
-[data-mode="agent"] img {
-  outline: 1px dashed var(--muted) !important;
-  outline-offset: 4px;
-  position: relative;
-}
-
-[data-mode="agent"] img::after {
-  content: "← non-text asset (alt text indexed)";
+.agent-annotation,
+.agent-annotation-block,
+.agent-annotation-float {
+  display: none;
 }
 
 /* Reduced motion — respects user toggle and OS preference */

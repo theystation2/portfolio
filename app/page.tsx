@@ -21,9 +21,19 @@ function AgentMeta({ data }: { data: Record<string, string> }) {
   );
 }
 
+function Annotation({ text, type = "inline" }: { text: string; type?: "inline" | "block" | "float" }) {
+  const className = type === "block"
+    ? "agent-annotation-block"
+    : type === "float"
+    ? "agent-annotation-float"
+    : "agent-annotation";
+  return <span className={className} aria-hidden="true">{text}</span>;
+}
+
 export default function Home() {
   return (
     <div className="flex flex-col flex-1">
+      <Annotation text="↓ structured metadata block — extracted by ATS, crawlers, and LLM agents via JSON-LD + data-* attributes" type="block" />
       <AgentMeta data={{
         name: "Jack Horton",
         title: "Staff Content Designer",
@@ -41,6 +51,7 @@ export default function Home() {
             <h1 className="text-4xl font-bold tracking-tight bg-gradient-to-r from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)] bg-clip-text text-transparent">
               Jack Horton
             </h1>
+            <Annotation text="← h1: primary identifier. Agents extract this as document subject." />
             <p className="mt-4 text-lg text-[var(--foreground)] opacity-90 max-w-lg leading-relaxed">
               Designer. 10+ years. Based in Montreal.
             </p>
@@ -93,6 +104,7 @@ export default function Home() {
 
       <main className="w-full max-w-3xl mx-auto px-6 pb-24">
         <section className="mb-16">
+          <Annotation text="↓ section: about — key-value pairs, grep-friendly" type="block" />
           <div className="flex items-center gap-3 mb-6">
             <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--muted)]">
               about
@@ -123,6 +135,7 @@ export default function Home() {
         </section>
 
         <section className="mb-16">
+          <Annotation text="↓ section: meta — context about the document itself" type="block" />
           <div className="flex items-center gap-3 mb-6">
             <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--muted)]">
               portfolio_info
@@ -134,6 +147,7 @@ export default function Home() {
           </p>
         </section>
 
+        <Annotation text="↓ section: work — each card is a navigable case study. Tags are keywords." type="block" />
         <div className="flex items-center gap-3 mb-8">
           <h2 className="text-xs font-mono uppercase tracking-widest text-[var(--muted)]">
             selected_work
@@ -188,6 +202,7 @@ export default function Home() {
       </main>
 
       <footer className="mt-auto py-10 text-center">
+        <Annotation text="↑ end of indexable content. Below: chrome only." type="block" />
         <p className="text-xs font-mono text-[var(--muted)] opacity-40">
           human_readable: true · machine_readable: true
         </p>
