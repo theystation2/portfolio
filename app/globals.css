@@ -763,7 +763,7 @@ body {
    Kawaii cats everywhere. Hide content, flash banner, celebrate adoption.
    ═══════════════════════════════════════════════════════════════════════════════ */
 
-[data-mode="cat"] {
+[data-cat="true"] {
   --background: #fff0f5;
   --foreground: #4a1942;
   --muted: #b06ab3;
@@ -783,15 +783,15 @@ body {
   --toggle-active: #ff69b4;
 }
 
-[data-mode="cat"] body {
+[data-cat="true"] body {
   background: linear-gradient(180deg, #fff0f5 0%, #ffe4f2 30%, #ffd6ec 60%, #fff0f5 100%) !important;
   overflow: hidden !important;
 }
 
-[data-mode="cat"] header,
-[data-mode="cat"] main,
-[data-mode="cat"] footer,
-[data-mode="cat"] .agent-meta {
+[data-cat="true"] header,
+[data-cat="true"] main,
+[data-cat="true"] footer,
+[data-cat="true"] .agent-meta {
   display: none !important;
 }
 

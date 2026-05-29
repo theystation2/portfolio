@@ -43,16 +43,15 @@ export function CatMode() {
   const [cats, setCats] = useState<FloatingCat[]>([]);
   const [emojis, setEmojis] = useState<FloatingEmoji[]>([]);
 
-  useEffect(() => {
-    const observer = new MutationObserver(() => {
-      const mode = document.documentElement.getAttribute("data-mode");
-      setActive(mode === "cat");
-    });
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-mode"] });
-    const mode = document.documentElement.getAttribute("data-mode");
-    setActive(mode === "cat");
-    return () => observer.disconnect();
-  }, []);
+  const toggle = () => {
+    const next = !active;
+    setActive(next);
+    if (next) {
+      document.documentElement.setAttribute("data-cat", "true");
+    } else {
+      document.documentElement.removeAttribute("data-cat");
+    }
+  };
 
   useEffect(() => {
     if (!active) return;
@@ -80,69 +79,82 @@ export function CatMode() {
     setEmojis(newEmojis);
   }, [active]);
 
-  if (!active) return null;
-
   return (
-    <div className="cat-mode-overlay">
-      <div className="cat-banner">
-        <span className="cat-banner-text">
-          🐱 In Montreal? Adopt a cat or make a donation 💕
-        </span>
-        <a
-          href="https://www.reseausecoursanimal.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="cat-banner-link"
-        >
-          reseausecoursanimal.org →
-        </a>
-      </div>
+    <>
+      <button
+        onClick={toggle}
+        className={`fixed bottom-5 right-5 z-50 px-3 py-1.5 text-xs font-mono rounded-full border transition-all ${
+          active
+            ? "bg-pink-400 border-pink-500 text-white animate-bounce shadow-[0_0_20px_rgba(255,105,180,0.8)]"
+            : "bg-[var(--surface)] border-[var(--border)] text-[var(--muted)] hover:border-pink-400 hover:text-pink-400"
+        }`}
+      >
+        {active ? "😻 meow 😻" : "🐱"}
+      </button>
 
-      {emojis.map((e) => (
-        <span
-          key={`emoji-${e.id}`}
-          className="cat-floating-emoji"
-          style={{
-            left: `${e.x}%`,
-            top: `${e.y}%`,
-            fontSize: `${e.size}px`,
-            animationDelay: `${e.delay}s`,
-          }}
-        >
-          {e.emoji}
-        </span>
-      ))}
+      {active && (
+        <div className="cat-mode-overlay">
+          <div className="cat-banner">
+            <span className="cat-banner-text">
+              🐱 In Montreal? Adopt a cat or make a donation 💕
+            </span>
+            <a
+              href="https://www.reseausecoursanimal.org/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cat-banner-link"
+            >
+              reseausecoursanimal.org →
+            </a>
+          </div>
 
-      {cats.map((cat) => (
-        <div
-          key={`cat-${cat.id}`}
-          className="cat-floating-photo"
-          style={{
-            left: `${cat.x}%`,
-            top: `${cat.y}%`,
-            transform: `rotate(${cat.rotation}deg) scale(${cat.scale})`,
-            animationDelay: `${cat.delay}s`,
-            animationDuration: `${cat.duration}s`,
-          }}
-        >
-          <img
-            src={cat.src}
-            alt="Adoptable cat"
-            loading="eager"
-          />
+          {emojis.map((e) => (
+            <span
+              key={`emoji-${e.id}`}
+              className="cat-floating-emoji"
+              style={{
+                left: `${e.x}%`,
+                top: `${e.y}%`,
+                fontSize: `${e.size}px`,
+                animationDelay: `${e.delay}s`,
+              }}
+            >
+              {e.emoji}
+            </span>
+          ))}
+
+          {cats.map((cat) => (
+            <div
+              key={`cat-${cat.id}`}
+              className="cat-floating-photo"
+              style={{
+                left: `${cat.x}%`,
+                top: `${cat.y}%`,
+                transform: `rotate(${cat.rotation}deg) scale(${cat.scale})`,
+                animationDelay: `${cat.delay}s`,
+                animationDuration: `${cat.duration}s`,
+              }}
+            >
+              <img
+                src={cat.src}
+                alt="Adoptable cat"
+                loading="eager"
+              />
+            </div>
+          ))}
+
+          <div className="cat-bottom-cta">
+            <p>These cats need homes. Every one of them is real and waiting.</p>
+            <a
+              href="https://www.reseausecoursanimal.org/adoption/adopter-chat/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              See all adoptable cats 🐾
+            </a>
+          </div>
         </div>
-      ))}
-
-      <div className="cat-bottom-cta">
-        <p>These cats need homes. Every one of them is real and waiting.</p>
-        <a
-          href="https://www.reseausecoursanimal.org/adoption/adopter-chat/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          See all adoptable cats 🐾
-        </a>
-      </div>
-    </div>
+      )}
+    </>
   );
 }

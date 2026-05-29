@@ -2,20 +2,18 @@
 
 import { useState, useEffect } from "react";
 
-type Mode = "minimalist" | "maximalist" | "agent" | "cat";
+type Mode = "minimalist" | "maximalist" | "agent";
 
 const modeLabels: Record<Mode, string> = {
   minimalist: "minimalist",
   maximalist: "maximalist",
   agent: "agent",
-  cat: "cat",
 };
 
 const modeDescriptions: Record<Mode, string> = {
   minimalist: "Efficient, structured, schema-driven.",
   maximalist: "Dense, vibrant, fun for fun.",
   agent: "Machine-parseable, RAG-structured.",
-  cat: "Adopt a cat in Montreal!",
 };
 
 export function ModeSwitcher() {
