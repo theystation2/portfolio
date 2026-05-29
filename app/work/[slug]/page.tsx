@@ -715,6 +715,104 @@ function DashboardVisualization() {
   );
 }
 
+function FunnelBar({ label, count, pct }: { label: string; count: number; pct: number }) {
+  return (
+    <div className="flex items-center gap-3">
+      <span className="text-[9px] font-mono text-[var(--muted)] w-28 text-right shrink-0 truncate">
+        {label}
+      </span>
+      <div className="flex-1 h-5 bg-[var(--background)] rounded-sm overflow-hidden relative">
+        <div
+          className="h-full bg-[var(--accent)] rounded-sm opacity-80"
+          style={{ width: `${pct}%` }}
+        />
+        <span className="absolute inset-0 flex items-center justify-center text-[9px] font-mono text-white mix-blend-difference">
+          {count.toLocaleString()} ({pct}%)
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function TaxOnboardingMetrics() {
+  return (
+    <div className="mt-4 bg-[var(--background)] border border-[var(--border)] rounded-xl p-4 overflow-hidden">
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-[10px] font-mono uppercase tracking-wide text-[var(--muted)] opacity-60">
+          onboarding funnels · post-launch
+        </span>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {/* Fine-tune: with product categorization */}
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-3">
+          <span className="text-[9px] font-mono uppercase tracking-wide text-[var(--muted)] block mb-2">
+            Fine-tune monitoring (with categorization)
+          </span>
+          <div className="space-y-1.5">
+            <FunnelBar label="WELCOME" count={1790} pct={100} />
+            <FunnelBar label="REVIEW_ADDRESS" count={1789} pct={100} />
+            <FunnelBar label="BACKUP_TAX_CODE" count={1790} pct={100} />
+            <FunnelBar label="CATEGORIZE" count={1790} pct={100} />
+            <FunnelBar label="COMPLETED" count={1755} pct={98} />
+          </div>
+          <span className="text-[10px] font-mono text-[var(--accent)] mt-2 block">98% completion</span>
+        </div>
+
+        {/* Start Collection funnel */}
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-3">
+          <span className="text-[9px] font-mono uppercase tracking-wide text-[var(--muted)] block mb-2">
+            Start collection steps
+          </span>
+          <div className="space-y-1.5">
+            <FunnelBar label="HOW_TAX_WORKS" count={3108} pct={100} />
+            <FunnelBar label="JURISDICTION" count={2866} pct={92} />
+            <FunnelBar label="RECOMMENDATION" count={2705} pct={87} />
+            <FunnelBar label="INTEGRATION" count={2338} pct={75} />
+            <FunnelBar label="ALL_DONE" count={2279} pct={73} />
+          </div>
+          <span className="text-[10px] font-mono text-[var(--accent)] mt-2 block">73% full activation</span>
+        </div>
+
+        {/* Fine-tune: no product categorization */}
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-3">
+          <span className="text-[9px] font-mono uppercase tracking-wide text-[var(--muted)] block mb-2">
+            Fine-tune monitoring (no categorization)
+          </span>
+          <div className="space-y-1.5">
+            <FunnelBar label="WELCOME" count={2109} pct={100} />
+            <FunnelBar label="REVIEW_ADDRESS" count={1810} pct={86} />
+            <FunnelBar label="BACKUP_TAX_CODE" count={1761} pct={83} />
+            <FunnelBar label="COMPLETED" count={1707} pct={81} />
+          </div>
+          <span className="text-[10px] font-mono text-[var(--accent)] mt-2 block">81% completion</span>
+        </div>
+
+        {/* Tax Collection Status */}
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-3">
+          <span className="text-[9px] font-mono uppercase tracking-wide text-[var(--muted)] block mb-2">
+            Collection status distribution
+          </span>
+          <div className="h-20 flex items-end gap-2 px-2">
+            <div className="flex-1 flex flex-col items-center gap-1">
+              <div className="w-full bg-[var(--accent)] opacity-70 rounded-sm" style={{ height: "90%" }} />
+              <span className="text-[8px] font-mono text-[var(--muted)]">NOT</span>
+            </div>
+            <div className="flex-1 flex flex-col items-center gap-1">
+              <div className="w-full bg-[var(--accent)] opacity-50 rounded-sm" style={{ height: "55%" }} />
+              <span className="text-[8px] font-mono text-[var(--muted)]">SELL+COLL</span>
+            </div>
+            <div className="flex-1 flex flex-col items-center gap-1">
+              <div className="w-full bg-[var(--accent)] opacity-60 rounded-sm" style={{ height: "52%" }} />
+              <span className="text-[8px] font-mono text-[var(--muted)]">SELL+NOT</span>
+            </div>
+          </div>
+          <span className="text-[10px] font-mono text-[var(--muted)] mt-2 block opacity-60">last 30 days · reportable merchants</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function SkillsPersonalSoftware({ project }: { project: typeof projects[number] }) {
   return (
     <div className="flex flex-col flex-1">
@@ -1205,6 +1303,39 @@ function StringsContentProjects({ project }: { project: typeof projects[number] 
                 </div>
               ))}
             </div>
+          </div>
+        </section>
+
+        {/* Tax onboarding redesign */}
+        <section>
+          <SectionLabel>tax onboarding redesign</SectionLabel>
+          <SkillCard
+            title="Stripe Tax onboarding & activation"
+            type="design sprint"
+            description="Co-led a design sprint to rebuild Stripe Tax's onboarding from scratch — replacing a confusing, disjointed setup flow with a guided experience that takes users from intent to compliance. Users described the old experience as 'the anti-TurboTax.' The new flow was prototyped, user-validated, and shipped in H1 2026."
+            details={[
+              "1-week design sprint",
+              "cross-functional (PM, Eng, Design)",
+              "user-validated prototype",
+              "shipped H1 2026",
+            ]}
+          />
+          <TaxOnboardingMetrics />
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The core design challenge was sequencing: users didn&rsquo;t understand what a registration
+              was, when they needed one, or what actions were required vs. optional. The new flow
+              introduces progressive disclosure — explaining concepts as they become relevant, setting
+              expectations on time and documents needed, and providing clear &ldquo;what happens next&rdquo;
+              guidance at each step.
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The 98% completion rate on the fine-tune monitoring flow (with product categorization)
+              represents a near-zero-friction path through what was previously the most confusing
+              part of tax setup. The start collection funnel shows 73% of merchants reaching full
+              activation — a significant improvement over the previous experience where users frequently
+              abandoned or made critical setup errors.
+            </p>
           </div>
         </section>
 
