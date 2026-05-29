@@ -584,6 +584,137 @@ function SkillCard({
   );
 }
 
+function DashboardBar({ height, accent }: { height: number; accent?: boolean }) {
+  return (
+    <div
+      className={`rounded-sm w-full ${accent ? "bg-[var(--accent)]" : "bg-[var(--accent)] opacity-60"}`}
+      style={{ height: `${height}%` }}
+    />
+  );
+}
+
+function DashboardLineChart({ data, color }: { data: number[]; color: string }) {
+  const max = Math.max(...data);
+  const points = data.map((d, i) => {
+    const x = (i / (data.length - 1)) * 100;
+    const y = 100 - (d / max) * 80 - 10;
+    return `${x},${y}`;
+  }).join(" ");
+
+  return (
+    <svg viewBox="0 0 100 100" className="w-full h-full" preserveAspectRatio="none">
+      <polyline
+        points={points}
+        fill="none"
+        stroke={color}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        vectorEffect="non-scaling-stroke"
+      />
+    </svg>
+  );
+}
+
+function DashboardVisualization() {
+  const tokenData = [45, 60, 52, 80, 95, 140, 120, 180, 160, 200, 150, 130, 170, 190, 210, 185];
+  const sessionsData = [3, 5, 4, 8, 12, 15, 20, 25, 18, 22, 30, 28, 35, 40, 38, 42];
+  const jiraData = [6, 4, 8, 5, 7, 3, 9, 6, 8, 4, 7, 5, 10, 8, 6, 7];
+  const prsData = [2, 1, 3, 2, 4, 3, 5, 2, 3, 4, 6, 3, 5, 4, 7, 5];
+  const meetingsData = [12, 14, 10, 16, 13, 11, 15, 12, 14, 10, 13, 16, 11, 14, 12, 15];
+  const ucrData = [4, 6, 3, 5, 7, 4, 8, 5, 6, 4, 7, 5, 8, 6, 9, 7];
+
+  return (
+    <div className="mt-4 bg-[var(--background)] border border-[var(--border)] rounded-xl p-4 overflow-hidden">
+      <div className="flex items-center justify-between mb-3">
+        <span className="text-[10px] font-mono uppercase tracking-wide text-[var(--muted)] opacity-60">
+          live dashboard · 16 weeks
+        </span>
+        <span className="text-[10px] font-mono text-[var(--muted)] opacity-40">
+          hubble/63368
+        </span>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        {/* AI Token Usage - line chart */}
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-3">
+          <span className="text-[9px] font-mono uppercase tracking-wide text-[var(--muted)] block mb-2">
+            AI tokens/week
+          </span>
+          <div className="h-12">
+            <DashboardLineChart data={tokenData} color="var(--accent)" />
+          </div>
+          <span className="text-[10px] font-mono text-[var(--accent)] mt-1 block">210K peak</span>
+        </div>
+
+        {/* AI Tool Sessions - bar chart */}
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-3">
+          <span className="text-[9px] font-mono uppercase tracking-wide text-[var(--muted)] block mb-2">
+            tool sessions
+          </span>
+          <div className="h-12 flex items-end gap-[2px]">
+            {sessionsData.slice(-10).map((d, i) => (
+              <DashboardBar key={i} height={(d / 42) * 100} accent={i >= 7} />
+            ))}
+          </div>
+          <span className="text-[10px] font-mono text-[var(--accent)] mt-1 block">42 peak</span>
+        </div>
+
+        {/* Jira Tickets Resolved */}
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-3">
+          <span className="text-[9px] font-mono uppercase tracking-wide text-[var(--muted)] block mb-2">
+            jira resolved
+          </span>
+          <div className="h-12 flex items-end gap-[2px]">
+            {jiraData.slice(-10).map((d, i) => (
+              <DashboardBar key={i} height={(d / 10) * 100} />
+            ))}
+          </div>
+          <span className="text-[10px] font-mono text-[var(--accent)] mt-1 block">10 peak</span>
+        </div>
+
+        {/* PRs Merged */}
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-3">
+          <span className="text-[9px] font-mono uppercase tracking-wide text-[var(--muted)] block mb-2">
+            PRs merged
+          </span>
+          <div className="h-12 flex items-end gap-[2px]">
+            {prsData.slice(-10).map((d, i) => (
+              <DashboardBar key={i} height={(d / 7) * 100} accent={i >= 8} />
+            ))}
+          </div>
+          <span className="text-[10px] font-mono text-[var(--accent)] mt-1 block">7 peak</span>
+        </div>
+
+        {/* Weekly Meeting Load */}
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-3">
+          <span className="text-[9px] font-mono uppercase tracking-wide text-[var(--muted)] block mb-2">
+            meetings/week
+          </span>
+          <div className="h-12 flex items-end gap-[2px]">
+            {meetingsData.slice(-10).map((d, i) => (
+              <DashboardBar key={i} height={(d / 16) * 100} />
+            ))}
+          </div>
+          <span className="text-[10px] font-mono text-[var(--accent-warm)] mt-1 block">16 peak</span>
+        </div>
+
+        {/* UCR Tickets Touched */}
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-3">
+          <span className="text-[9px] font-mono uppercase tracking-wide text-[var(--muted)] block mb-2">
+            UCR tickets
+          </span>
+          <div className="h-12 flex items-end gap-[2px]">
+            {ucrData.slice(-10).map((d, i) => (
+              <DashboardBar key={i} height={(d / 9) * 100} />
+            ))}
+          </div>
+          <span className="text-[10px] font-mono text-[var(--accent)] mt-1 block">9 peak</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function SkillsPersonalSoftware({ project }: { project: typeof projects[number] }) {
   return (
     <div className="flex flex-col flex-1">
@@ -811,6 +942,7 @@ function SkillsPersonalSoftware({ project }: { project: typeof projects[number] 
               "Kai-automatable refresh",
             ]}
           />
+          <DashboardVisualization />
           <div className="mt-4 space-y-3">
             <p className="text-sm text-[var(--muted)] leading-relaxed">
               Built to answer the question: &ldquo;what does my work actually look like quantitatively?&rdquo;
