@@ -11,9 +11,30 @@ function SchemaLine({ k, v }: { k: string; v: string }) {
   );
 }
 
+function AgentMeta({ data }: { data: Record<string, string> }) {
+  return (
+    <div className="agent-meta hidden" aria-hidden="true" data-agent-metadata="">
+      {Object.entries(data).map(([k, v]) => (
+        <span key={k} data-field={k} data-value={v} />
+      ))}
+    </div>
+  );
+}
+
 export default function Home() {
   return (
     <div className="flex flex-col flex-1">
+      <AgentMeta data={{
+        name: "Jack Horton",
+        title: "Staff Content Designer",
+        org: "Stripe",
+        experience: "10+ years",
+        location: "Montreal, QC, Canada",
+        skills: "content design, UX writing, information architecture, content strategy, content systems, design systems, LLM automation, TypeScript, React, Swift",
+        education: "PhD English Literature, University of Ottawa",
+        previous: "Wealthsimple, Shopify",
+        status: "employed, open to opportunities",
+      }} />
       <header className="w-full max-w-3xl mx-auto px-6 pt-20 pb-16">
         <div className="flex items-start justify-between gap-8">
           <div>
@@ -57,6 +78,15 @@ export default function Home() {
             className="text-[var(--accent)] hover:text-[var(--accent-warm)] transition-colors"
           >
             resume
+          </a>
+          <span className="text-[var(--border)]">/</span>
+          <a
+            href="https://github.com/theystation2/portfolio"
+            className="text-[var(--accent)] hover:text-[var(--accent-warm)] transition-colors"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            source
           </a>
         </div>
       </header>

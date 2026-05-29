@@ -476,6 +476,40 @@ body {
   margin-bottom: 0.5rem;
 }
 
+[data-mode="agent"] .agent-meta {
+  display: block !important;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  margin: 0 auto 1rem;
+  max-width: 48rem;
+}
+
+[data-mode="agent"] .agent-meta::before {
+  content: "<!-- @agent-metadata -->";
+  display: block;
+  color: var(--muted);
+  opacity: 0.6;
+  margin-bottom: 0.5rem;
+}
+
+[data-mode="agent"] .agent-meta span[data-field]::before {
+  content: attr(data-field) ": ";
+  color: var(--accent);
+}
+
+[data-mode="agent"] .agent-meta span[data-field]::after {
+  content: attr(data-value);
+  color: var(--foreground);
+}
+
+[data-mode="agent"] .agent-meta span[data-field] {
+  display: block;
+  line-height: 1.8;
+}
+
 /* Reduced motion — respects user toggle and OS preference */
 
 [data-reduced-motion="true"] *,
