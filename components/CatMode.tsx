@@ -83,7 +83,7 @@ export function CatMode() {
     <>
       <button
         onClick={toggle}
-        className={`fixed bottom-5 right-5 z-50 px-3 py-1.5 text-xs font-mono rounded-full border transition-all ${
+        className={`fixed top-5 right-5 z-50 px-3 py-1.5 text-xs font-mono rounded-full border transition-all ${
           active
             ? "bg-pink-400 border-pink-500 text-white animate-bounce shadow-[0_0_20px_rgba(255,105,180,0.8)]"
             : "bg-[var(--surface)] border-[var(--border)] text-[var(--muted)] hover:border-pink-400 hover:text-pink-400"
