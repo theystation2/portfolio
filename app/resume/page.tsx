@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PrintButton } from "./PrintButton";
 
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
@@ -72,9 +73,12 @@ export default function ResumePage() {
         <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)] bg-clip-text text-transparent">
           Resume
         </h1>
-        <p className="mt-3 text-sm text-[var(--muted)]">
-          Jack Horton &middot; Montreal, QC
-        </p>
+        <div className="flex items-center justify-between mt-3">
+          <p className="text-sm text-[var(--muted)]">
+            Jack Horton &middot; Montreal, QC
+          </p>
+          <PrintButton />
+        </div>
       </header>
 
       <main className="w-full max-w-3xl mx-auto px-6 pb-24 space-y-12">

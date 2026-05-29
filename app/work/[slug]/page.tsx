@@ -80,6 +80,19 @@ export default async function WorkPage({
   );
 }
 
+function TldrSummary({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg px-5 py-4 mt-6">
+      <span className="text-[10px] font-mono uppercase tracking-wide text-[var(--accent)] opacity-70">
+        tl;dr
+      </span>
+      <p className="mt-1.5 text-sm text-[var(--foreground)] opacity-85 leading-relaxed">
+        {children}
+      </p>
+    </div>
+  );
+}
+
 function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex items-center gap-3 mb-4">
@@ -243,6 +256,9 @@ function BillingIACaseStudy({ project }: { project: typeof projects[number] }) {
           <Meta k="tags" v={project.tags.join(", ")} />
           <Meta k="status" v="in progress" />
         </div>
+        <TldrSummary>
+          Redesigned Stripe&rsquo;s billing navigation from fragmented surfaces into a principled IA — three design principles, workload-based tabs, and agent-ready overview pages that scale as the product grows.
+        </TldrSummary>
       </header>
 
       <main className="w-full max-w-3xl mx-auto px-6 pb-24 space-y-12">
@@ -385,6 +401,29 @@ function BillingIACaseStudy({ project }: { project: typeof projects[number] }) {
               <li>&ldquo;What did users think about the navigation and workloads?&rdquo; — concept test results</li>
             </ul>
           </div>
+        </section>
+
+        {/* Impact */}
+        <section>
+          <SectionLabel>impact</SectionLabel>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
+              <div className="text-lg font-bold text-[var(--accent)]">3</div>
+              <div className="text-[10px] font-mono text-[var(--muted)] mt-1">design principles adopted</div>
+            </div>
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
+              <div className="text-lg font-bold text-[var(--accent)]">12+</div>
+              <div className="text-[10px] font-mono text-[var(--muted)] mt-1">billing objects placed</div>
+            </div>
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
+              <div className="text-lg font-bold text-[var(--accent)]">1</div>
+              <div className="text-[10px] font-mono text-[var(--muted)] mt-1">unified nav model</div>
+            </div>
+          </div>
+          <p className="mt-4 text-sm text-[var(--muted)] leading-relaxed">
+            The IA framework was adopted as the canonical navigation model for billing. Separately, related
+            SaaS pricing content strategy work contributed to a projected $2.5&ndash;3M/month revenue uplift.
+          </p>
         </section>
 
         {/* What's next */}
@@ -563,6 +602,9 @@ function SkillsPersonalSoftware({ project }: { project: typeof projects[number] 
           <Meta k="year" v={project.year} />
           <Meta k="tags" v={project.tags.join(", ")} />
         </div>
+        <TldrSummary>
+          Personal software and Claude-native tooling — a macOS context app, CI validation skills, session memory systems, and rapid prototyping pipelines. Working tools that treat the designer as a system participant.
+        </TldrSummary>
       </header>
 
       <main className="w-full max-w-3xl mx-auto px-6 pb-24 space-y-12">
@@ -827,6 +869,9 @@ function StringsContentProjects({ project }: { project: typeof projects[number] 
           <Meta k="year" v={project.year} />
           <Meta k="tags" v={project.tags.join(", ")} />
         </div>
+        <TldrSummary>
+          Systems-level design work — standardizing 10,000+ dashboard labels, building automated voice audits, and creating evaluation infrastructure that measures whether writing quality is improving or regressing over time.
+        </TldrSummary>
       </header>
 
       <main className="w-full max-w-3xl mx-auto px-6 pb-24 space-y-12">
@@ -1031,6 +1076,29 @@ function StringsContentProjects({ project }: { project: typeof projects[number] 
           </div>
         </section>
 
+        {/* Impact */}
+        <section>
+          <SectionLabel>impact</SectionLabel>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
+              <div className="text-lg font-bold text-[var(--accent)]">10,000+</div>
+              <div className="text-[10px] font-mono text-[var(--muted)] mt-1">labels standardized</div>
+            </div>
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
+              <div className="text-lg font-bold text-[var(--accent)]">12</div>
+              <div className="text-[10px] font-mono text-[var(--muted)] mt-1">product areas audited</div>
+            </div>
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
+              <div className="text-lg font-bold text-[var(--accent)]">κ &gt; 0.4</div>
+              <div className="text-[10px] font-mono text-[var(--muted)] mt-1">eval reliability threshold</div>
+            </div>
+          </div>
+          <p className="mt-4 text-sm text-[var(--muted)] leading-relaxed">
+            Label taxonomy adopted as the canonical source for dashboard navigation terms. Voice audit
+            methodology generalized across 12 product areas. Eval framework in active use for rule change governance.
+          </p>
+        </section>
+
         {/* Thread */}
         <section>
           <SectionLabel>the thread</SectionLabel>
@@ -1079,6 +1147,9 @@ function UCRTriageCaseStudy({ project }: { project: typeof projects[number] }) {
           <Meta k="tags" v={project.tags.join(", ")} />
           <Meta k="status" v="shipping" />
         </div>
+        <TldrSummary>
+          Designed and built an LLM-powered triage system that classifies incoming communications tickets by intent and complexity, replacing a manual review bottleneck with structured evaluation rules that execute designer judgment at scale.
+        </TldrSummary>
       </header>
 
       <main className="w-full max-w-3xl mx-auto px-6 pb-24 space-y-12">
@@ -1210,6 +1281,29 @@ function UCRTriageCaseStudy({ project }: { project: typeof projects[number] }) {
               </p>
             </div>
           </div>
+        </section>
+
+        {/* Impact */}
+        <section>
+          <SectionLabel>impact</SectionLabel>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
+              <div className="text-lg font-bold text-[var(--accent)]">100s</div>
+              <div className="text-[10px] font-mono text-[var(--muted)] mt-1">tickets/week classified</div>
+            </div>
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
+              <div className="text-lg font-bold text-[var(--accent)]">hours→min</div>
+              <div className="text-[10px] font-mono text-[var(--muted)] mt-1">triage time reduction</div>
+            </div>
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
+              <div className="text-lg font-bold text-[var(--accent)]">0</div>
+              <div className="text-[10px] font-mono text-[var(--muted)] mt-1">manual triage by designers</div>
+            </div>
+          </div>
+          <p className="mt-4 text-sm text-[var(--muted)] leading-relaxed">
+            Shifted the team from reactive ticket processing to oversight and rule governance. Designers now
+            spend time defining quality criteria instead of doing first-pass classification.
+          </p>
         </section>
 
         {/* Design angle */}

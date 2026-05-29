@@ -147,6 +147,56 @@ body {
   }
 }
 
+/* Print styles — for resume PDF export */
+
+@media print {
+  body {
+    background: white !important;
+    color: #1a1a2e !important;
+    font-size: 11pt !important;
+  }
+
+  .fixed, footer, nav, [class*="WhimsyButton"], [class*="ThemeToggle"] {
+    display: none !important;
+  }
+
+  header {
+    padding-top: 0 !important;
+  }
+
+  a {
+    color: #1a1a2e !important;
+    text-decoration: none !important;
+  }
+
+  h1 {
+    background: none !important;
+    -webkit-text-fill-color: #1a1a2e !important;
+    color: #1a1a2e !important;
+    font-size: 20pt !important;
+  }
+
+  [class*="border"] {
+    border-color: #e5e7eb !important;
+  }
+
+  [class*="bg-[var(--surface)]"] {
+    background: transparent !important;
+  }
+
+  * {
+    color: #1a1a2e !important;
+  }
+
+  [class*="text-[var(--accent)]"] {
+    color: #4b5563 !important;
+  }
+
+  [class*="text-[var(--muted)]"] {
+    color: #6b7280 !important;
+  }
+}
+
 /* WHIMSY MODE — everything dialed to 11 */
 
 @keyframes rainbow {
