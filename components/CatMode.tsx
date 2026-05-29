@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 
 const CAT_PHOTOS = [
-  "https://www.reseausecoursanimal.org/wp-content/uploads/2024/12/chat-brun-1024x682.jpg",
-  "https://www.reseausecoursanimal.org/wp-content/uploads/elementor/thumbs/chat-adoption-malo-qrcpb0h03q9fzcz8v2k9rh5qmc2xhdyw9w1b6mgsrk.jpg",
-  "https://www.reseausecoursanimal.org/wp-content/uploads/elementor/thumbs/chat-adoption-gratouille-scaled-qrcp8nvk8hu2kgjuzyv0n5cm6zviwduru1ws54fgco.jpg",
-  "https://www.reseausecoursanimal.org/wp-content/uploads/2024/07/chat-adoption-pivoine-683x1024.jpg",
-  "https://www.reseausecoursanimal.org/wp-content/uploads/2025/05/Byba-1024x768.jpg",
-  "https://www.reseausecoursanimal.org/wp-content/uploads/2025/05/Anatole-1-768x1024.jpg",
-  "https://www.reseausecoursanimal.org/wp-content/uploads/2024/07/chat-mystere.jpg",
+  { src: "https://www.reseausecoursanimal.org/wp-content/uploads/2024/12/chat-brun-1024x682.jpg", url: "https://www.reseausecoursanimal.org/" },
+  { src: "https://www.reseausecoursanimal.org/wp-content/uploads/elementor/thumbs/chat-adoption-malo-qrcpb0h03q9fzcz8v2k9rh5qmc2xhdyw9w1b6mgsrk.jpg", url: "https://www.reseausecoursanimal.org/adoption/adopter-chat/" },
+  { src: "https://www.reseausecoursanimal.org/wp-content/uploads/elementor/thumbs/chat-adoption-gratouille-scaled-qrcp8nvk8hu2kgjuzyv0n5cm6zviwduru1ws54fgco.jpg", url: "https://www.reseausecoursanimal.org/adoption/adopter-chat/" },
+  { src: "https://www.reseausecoursanimal.org/wp-content/uploads/2024/07/chat-adoption-pivoine-683x1024.jpg", url: "https://www.reseausecoursanimal.org/adoption/adopter-chat/" },
+  { src: "https://www.reseausecoursanimal.org/wp-content/uploads/2025/05/Byba-1024x768.jpg", url: "https://www.reseausecoursanimal.org/parrainage/chats-parrainer/" },
+  { src: "https://www.reseausecoursanimal.org/wp-content/uploads/2025/05/Anatole-1-768x1024.jpg", url: "https://www.reseausecoursanimal.org/parrainage/chats-parrainer/" },
+  { src: "https://www.reseausecoursanimal.org/wp-content/uploads/2024/07/chat-mystere.jpg", url: "https://www.reseausecoursanimal.org/parrainage/chats-parrainer/" },
 ];
 
 const KAWAII_EMOJIS = ["🐱", "🐾", "💕", "✨", "🌸", "💖", "😻", "🎀", "⭐", "🌟", "💗", "🐈"];
@@ -21,6 +21,7 @@ function randomBetween(min: number, max: number) {
 interface FloatingCat {
   id: number;
   src: string;
+  url: string;
   x: number;
   y: number;
   rotation: number;
@@ -56,16 +57,20 @@ export function CatMode() {
   useEffect(() => {
     if (!active) return;
 
-    const newCats: FloatingCat[] = Array.from({ length: 12 }, (_, i) => ({
-      id: i,
-      src: CAT_PHOTOS[i % CAT_PHOTOS.length],
-      x: randomBetween(2, 85),
-      y: randomBetween(15, 80),
-      rotation: randomBetween(-25, 25),
-      scale: randomBetween(0.6, 1.2),
-      delay: randomBetween(0, 3),
-      duration: randomBetween(2, 5),
-    }));
+    const newCats: FloatingCat[] = Array.from({ length: 12 }, (_, i) => {
+      const photo = CAT_PHOTOS[i % CAT_PHOTOS.length];
+      return {
+        id: i,
+        src: photo.src,
+        url: photo.url,
+        x: randomBetween(2, 85),
+        y: randomBetween(15, 80),
+        rotation: randomBetween(-25, 25),
+        scale: randomBetween(0.6, 1.2),
+        delay: randomBetween(0, 3),
+        duration: randomBetween(2, 5),
+      };
+    });
     setCats(newCats);
 
     const newEmojis: FloatingEmoji[] = Array.from({ length: 30 }, (_, i) => ({
@@ -94,6 +99,13 @@ export function CatMode() {
 
       {active && (
         <div className="cat-mode-overlay">
+          <button
+            onClick={toggle}
+            className="fixed top-5 left-5 z-[10002] px-4 py-2 text-sm font-semibold rounded-full bg-white text-pink-600 border-2 border-pink-400 shadow-lg hover:bg-pink-50 hover:scale-105 transition-all"
+          >
+            ← Back to portfolio
+          </button>
+
           <div className="cat-banner">
             <span className="cat-banner-text">
               🐱 In Montreal? Adopt a cat or make a donation 💕
@@ -124,8 +136,11 @@ export function CatMode() {
           ))}
 
           {cats.map((cat) => (
-            <div
+            <a
               key={`cat-${cat.id}`}
+              href={cat.url}
+              target="_blank"
+              rel="noopener noreferrer"
               className="cat-floating-photo"
               style={{
                 left: `${cat.x}%`,
@@ -137,10 +152,10 @@ export function CatMode() {
             >
               <img
                 src={cat.src}
-                alt="Adoptable cat"
+                alt="Adoptable cat — click to visit profile"
                 loading="eager"
               />
-            </div>
+            </a>
           ))}
 
           <div className="cat-bottom-cta">
