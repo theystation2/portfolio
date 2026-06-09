@@ -80,9 +80,9 @@ export function ThemeToggle() {
   }, [reducedMotion]);
 
   return (
-    <div className="fixed bottom-5 right-5 z-50">
+    <div className="fixed bottom-5 right-5 z-[10003]">
       {open && (
-        <div className="absolute bottom-12 right-0 bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 shadow-xl min-w-[220px] space-y-4">
+        <div className="accessibility-panel absolute bottom-12 right-0 bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 shadow-xl min-w-[220px] space-y-4">
           <div>
             <span className="text-[10px] font-mono uppercase tracking-wide text-[var(--muted)] block mb-2">
               theme
@@ -164,7 +164,7 @@ export function ThemeToggle() {
       )}
       <button
         onClick={() => setOpen(!open)}
-        className={`px-3 py-1.5 text-xs font-mono rounded-full border transition-all ${
+        className={`accessibility-toggle px-3 py-1.5 text-xs font-mono rounded-full border transition-all ${
           open
             ? "bg-[var(--toggle-active)] border-[var(--toggle-active)] text-white shadow-lg"
             : "bg-[var(--surface)] border-[var(--border)] text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]"

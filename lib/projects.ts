@@ -10,6 +10,15 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "alloy",
+    title: "Project Alloy — unified usage-based billing",
+    description:
+      "Designing the domain model, information architecture, and experience principles for unifying Stripe Billing and Metronome into one agentic-first platform — one UX, one API, no seams.",
+    role: "Design — IA, naming, ontology",
+    year: "2026",
+    tags: ["UBB", "Domain model", "Agents", "IA", "Naming"],
+  },
+  {
     slug: "billing-ia",
     title: "Billing information architecture",
     description:
@@ -26,6 +35,15 @@ export const projects: Project[] = [
     role: "Design + systems",
     year: "2026",
     tags: ["Automation", "Ops tooling", "Content systems", "LLM"],
+  },
+  {
+    slug: "dante-content-model",
+    title: "Dante — AI content design model",
+    description:
+      "Building and refining an AI model that writes, reviews, and enforces UX writing standards across Stripe — from rule design and training to infrastructure that has fixed 18,000+ string violations at scale.",
+    role: "Model design + infrastructure",
+    year: "2024–2026",
+    tags: ["AI model", "Content systems", "Evals", "Automation"],
   },
   {
     slug: "skills-personal-software",

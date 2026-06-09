@@ -261,7 +261,7 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-[data-mode="maximalist"] [class*="font-mono"] {
+[data-mode="maximalist"] [class*="font-mono"]:not(.accessibility-panel *):not(.accessibility-toggle) {
   font-family: var(--font-geist-mono), monospace !important;
   font-weight: 700 !important;
   letter-spacing: 0.05em;
@@ -285,7 +285,7 @@ body {
     12px 12px 0 rgba(107, 203, 255, 0.3) !important;
 }
 
-[data-mode="maximalist"] [class*="rounded-lg"] {
+[data-mode="maximalist"] [class*="rounded-lg"]:not(.accessibility-panel) {
   border-radius: 0 !important;
   border: 2px solid var(--accent-cool) !important;
 }

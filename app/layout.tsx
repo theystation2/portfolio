@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { WhimsyButton } from "@/components/WhimsyButton";
 import { ModeSwitcher } from "@/components/ModeSwitcher";
@@ -84,6 +85,7 @@ export default function RootLayout({
         <CatMode />
         <ThemeToggle />
         <WhimsyButton />
+        <Analytics />
       </body>
     </html>
   );

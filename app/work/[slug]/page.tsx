@@ -26,12 +26,20 @@ export default async function WorkPage({
   const project = projects.find((p) => p.slug === slug);
   if (!project) notFound();
 
+  if (project.slug === "alloy") {
+    return <AlloyCaseStudy project={project} />;
+  }
+
   if (project.slug === "billing-ia") {
     return <BillingIACaseStudy project={project} />;
   }
 
   if (project.slug === "ucr-triage") {
     return <UCRTriageCaseStudy project={project} />;
+  }
+
+  if (project.slug === "dante-content-model") {
+    return <DanteContentModel project={project} />;
   }
 
   if (project.slug === "skills-personal-software") {
@@ -233,6 +241,247 @@ function AgentCardsViz() {
           <p className="text-[10px] text-[var(--muted)] leading-relaxed">{a.desc}</p>
         </div>
       ))}
+    </div>
+  );
+}
+
+function AlloyCaseStudy({ project }: { project: typeof projects[number] }) {
+  return (
+    <div className="flex flex-col flex-1">
+      <header className="w-full max-w-3xl mx-auto px-6 pt-16 pb-8">
+        <Link
+          href="/"
+          className="text-xs font-mono text-[var(--accent)] hover:text-[var(--accent-warm)] transition-colors mb-8 inline-block"
+        >
+          &larr; index
+        </Link>
+        <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+          {project.title}
+        </h1>
+        <div className="flex flex-wrap gap-x-6 gap-y-2 mt-5 py-4 border-y border-[var(--border)]">
+          <Meta k="role" v={project.role} />
+          <Meta k="year" v={project.year} />
+          <Meta k="tags" v={project.tags.join(", ")} />
+          <Meta k="status" v="in progress — north star sprint" />
+        </div>
+        <TldrSummary>
+          Unifying Stripe Billing and Metronome into one platform — designing the domain model, naming ontology, information architecture, and experience principles for an agentic-first usage-based billing experience. One UX, one API, no seams.
+        </TldrSummary>
+      </header>
+
+      <main className="w-full max-w-3xl mx-auto px-6 pb-24 space-y-12">
+
+        {/* Context */}
+        <section>
+          <SectionLabel>context</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              Stripe acquired Metronome — a best-in-class usage-based billing platform with metering,
+              rating, credit grants, and contract management. The challenge: Metronome is a separate
+              product with its own API, dashboard, customer object, and product catalog. Users who need
+              both subscription billing and usage-based billing today must maintain two accounts, two
+              APIs, two dashboards, and manually stitch provisioning across systems.
+            </p>
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              Project Alloy is the initiative to weave these into one platform — iteratively, without
+              forced migrations, continuously delivering value. The north star: a user logs into Stripe,
+              deploys a new business, and never knows Metronome is backing it.
+            </p>
+          </div>
+        </section>
+
+        {/* My role */}
+        <section>
+          <SectionLabel>my role</SectionLabel>
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 space-y-3">
+            <p className="text-sm text-[var(--foreground)] opacity-90 leading-relaxed">
+              I&rsquo;m responsible for the structural design layer — the work that sits between
+              product strategy and UI execution:
+            </p>
+            <ul className="space-y-2 text-sm text-[var(--muted)]">
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> <strong>Domain modelling:</strong> Defining how billing concepts relate to each other across both systems</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> <strong>Information architecture:</strong> Where unified objects live in the dashboard and how operators navigate between them</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> <strong>Naming &amp; ontology:</strong> What things are called and why — resolving terminology collisions between Stripe and Metronome</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> <strong>Experience principles:</strong> Constraints that make design decisions testable</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> <strong>Research:</strong> Deep dives on ICP users (AI-native companies) to ground decisions in real workflows</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* The challenge */}
+        <section>
+          <SectionLabel>the challenge</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              No one in the market has solved what hybrid subscription + usage-based billing looks like
+              for a finance operator. The users we&rsquo;re designing for — AI-native companies like
+              Anthropic, Perplexity, Notion, and Replit — are scaling fast with hybrid pricing models,
+              often running finance on a compressed timeline. They need:
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
+              <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
+                <span className="text-xs font-semibold text-[var(--foreground)]">Flat fee + credits</span>
+                <p className="text-[10px] text-[var(--muted)] mt-1">Subscription that comes with AI credits, usage metered and rated separately</p>
+              </div>
+              <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
+                <span className="text-xs font-semibold text-[var(--foreground)]">Seat-scoped credits</span>
+                <p className="text-[10px] text-[var(--muted)] mt-1">Per-seat credit pools with org-level overflow — enterprise pricing</p>
+              </div>
+              <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
+                <span className="text-xs font-semibold text-[var(--foreground)]">Contract + prepaid</span>
+                <p className="text-[10px] text-[var(--muted)] mt-1">Committed spend with usage drawdown, auto-recharge at threshold</p>
+              </div>
+              <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
+                <span className="text-xs font-semibold text-[var(--foreground)]">Consolidated invoicing</span>
+                <p className="text-[10px] text-[var(--muted)] mt-1">Recurring + usage line items on one invoice with configurable rollups</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Friction */}
+        <section>
+          <SectionLabel>friction landscape</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              Today&rsquo;s users operate across two systems. The friction isn&rsquo;t just &ldquo;two
+              dashboards&rdquo; — it&rsquo;s semantic misalignment at every layer:
+            </p>
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl overflow-hidden">
+              <table className="w-full text-[11px]">
+                <thead>
+                  <tr className="border-b border-[var(--border)]">
+                    <th className="text-left px-5 py-2 font-mono text-[10px] text-[var(--muted)] uppercase tracking-wide">Layer</th>
+                    <th className="text-left px-5 py-2 font-mono text-[10px] text-[var(--muted)] uppercase tracking-wide">Friction</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { layer: "Customer object", friction: "Two separate customer records stitched manually off-platform" },
+                    { layer: "Product catalog", friction: "Navigate between systems to create and manage pricing" },
+                    { layer: "Subscriptions ↔ Contracts", friction: "Provisioning concepts stitched by hand, hour-alignment only in Metronome" },
+                    { layer: "Invoicing", friction: "Usage and recurring charges on separate invoices, no consolidated view" },
+                    { layer: "Rev ops workflows", friction: "Common actions (void, regenerate) start in one system and end in another" },
+                    { layer: "Checkout interop", friction: "Metronome objects can't be sold via Stripe Checkout" },
+                  ].map((r) => (
+                    <tr key={r.layer} className="border-b border-[var(--border)] last:border-0">
+                      <td className="px-5 py-2.5 text-[var(--foreground)] font-medium">{r.layer}</td>
+                      <td className="px-5 py-2.5 text-[var(--muted)]">{r.friction}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        {/* Approach */}
+        <section>
+          <SectionLabel>approach</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              We&rsquo;re designing for three user segments simultaneously: Segment 1 (existing Stripe
+              subscriptions users adding usage), Segment 2 (Metronome-primary users wanting Stripe
+              interop), and Segment 3 (sidecar users running both in parallel). The domain model must
+              serve all three without forcing migration.
+            </p>
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              My contribution centers on the ontological layer: defining how concepts like
+              &ldquo;subscription,&rdquo; &ldquo;contract,&rdquo; &ldquo;plan,&rdquo; and &ldquo;rate
+              card&rdquo; resolve when both systems use the same words to mean different things.
+              The naming decisions aren&rsquo;t cosmetic — they determine whether a user can form a
+              correct mental model of the unified system without reading documentation.
+            </p>
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              The agentic direction adds a forcing function: as agents perform billing operations on
+              behalf of users, the surface evolves from an operator UI to an observability layer.
+              The domain model must be navigable by both humans scanning a dashboard and agents
+              executing structured workflows.
+            </p>
+          </div>
+        </section>
+
+        {/* Principles */}
+        <section>
+          <SectionLabel>experience principles</SectionLabel>
+          <div className="grid gap-3">
+            <PrincipleCard
+              number="01"
+              title="One system, one truth."
+              description="A user logs into Stripe, deploys a business, and never knows Metronome is backing it. The architecture is an implementation detail, not a user-facing seam."
+            />
+            <PrincipleCard
+              number="02"
+              title="Hybrid-native, not bolted on."
+              description="Subscription + usage is the default pricing model for AI companies. The experience must treat hybrid billing as first-class, not as two products stitched together."
+            />
+            <PrincipleCard
+              number="03"
+              title="Agentic from day one."
+              description="Every surface ships as both a human-readable dashboard and an agent-navigable workspace. Observability and action are designed for programmatic consumers in parallel, not retrofitted."
+            />
+            <PrincipleCard
+              number="04"
+              title="No forced migrations."
+              description="Users on either system today can adopt unified capabilities incrementally. The architecture earns trust through delivered value, not mandated cutover."
+            />
+          </div>
+        </section>
+
+        {/* ICP */}
+        <section>
+          <SectionLabel>ICP: AI-native companies</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              We&rsquo;re designing primarily for AI-native companies scaling fast with hybrid pricing.
+              Each represents a different facet of the problem:
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {[
+                { name: "Anthropic", model: "Prepaid credits + usage metering across API tiers" },
+                { name: "Perplexity", model: "Consumer subs + API credits + seat-scoped enterprise pools" },
+                { name: "Notion", model: "PLG flat fee adding AI credits to 400K+ existing customers" },
+                { name: "Replit", model: "Usage-first with subscription wrapper, rapid model iteration" },
+              ].map((c) => (
+                <div key={c.name} className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
+                  <span className="text-xs font-semibold text-[var(--foreground)]">{c.name}</span>
+                  <p className="text-[10px] text-[var(--muted)] mt-1 leading-relaxed">{c.model}</p>
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              Every design decision is testable against these users: would this model work for
+              Perplexity&rsquo;s seat-scoped credits? Can Notion backfill 400K customers without
+              a migration event? Does the naming hold when Anthropic&rsquo;s finance team reads it?
+            </p>
+          </div>
+        </section>
+
+        {/* What's next */}
+        <section>
+          <SectionLabel>what&rsquo;s next</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              We&rsquo;re in a north star design sprint through end of June — producing the visual
+              vision for what the combined experience looks and feels like. The output: experience
+              principles, a unified surface design, ICP-specific walkthroughs, and a directional
+              artifact for the agentic layer.
+            </p>
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              The bet: that designing the ontology and IA correctly — before pixel-level UI — is
+              what determines whether unification feels coherent or cobbled. Names, relationships,
+              and navigation structure are the load-bearing decisions. Everything else follows from
+              getting those right.
+            </p>
+          </div>
+        </section>
+
+        <footer className="pt-8 border-t border-[var(--border)]">
+          <p className="text-xs font-mono text-[var(--muted)] opacity-50">
+            // north star sprint in progress · domain model under active iteration
+          </p>
+        </footer>
+      </main>
     </div>
   );
 }
@@ -813,6 +1062,276 @@ function TaxOnboardingMetrics() {
   );
 }
 
+function DanteContentModel({ project }: { project: typeof projects[number] }) {
+  return (
+    <div className="flex flex-col flex-1">
+      <header className="w-full max-w-3xl mx-auto px-6 pt-16 pb-8">
+        <Link
+          href="/"
+          className="text-xs font-mono text-[var(--accent)] hover:text-[var(--accent-warm)] transition-colors mb-8 inline-block"
+        >
+          &larr; index
+        </Link>
+        <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-[var(--gradient-from)] via-[var(--gradient-via)] to-[var(--gradient-to)] bg-clip-text text-transparent">
+          {project.title}
+        </h1>
+        <div className="flex flex-wrap gap-x-6 gap-y-2 mt-5 py-4 border-y border-[var(--border)]">
+          <Meta k="role" v={project.role} />
+          <Meta k="year" v={project.year} />
+          <Meta k="tags" v={project.tags.join(", ")} />
+          <Meta k="status" v="production — continuous iteration" />
+        </div>
+        <TldrSummary>
+          Dante is an AI content design model that writes, reviews, and enforces UX writing standards
+          across Stripe. I design its rules, refine its training, build evaluation infrastructure, and
+          operate Project Typo-be-Gone — which has fixed 18,000+ string violations in code and product writing.
+        </TldrSummary>
+      </header>
+
+      <main className="w-full max-w-3xl mx-auto px-6 pb-24 space-y-12">
+
+        {/* Context */}
+        <section>
+          <SectionLabel>context</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              Stripe&rsquo;s dashboard, documentation, and communications span tens of thousands of
+              user-facing strings across hundreds of surfaces. Maintaining quality, consistency, and
+              voice at this scale is impossible through manual review alone. Dante is the system we
+              built to solve this — an AI model that understands Stripe&rsquo;s writing standards
+              deeply enough to write new copy, review existing copy, and fix violations at scale.
+            </p>
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              Dante isn&rsquo;t a generic writing assistant with a style guide appended. It&rsquo;s a
+              purpose-built content design model with 70+ interacting rules, structured evaluation
+              frameworks, a two-pass review architecture (fast mechanical checks + deep AI judgment),
+              and an iterative training loop that feeds corrections back into the model&rsquo;s behavior.
+            </p>
+          </div>
+        </section>
+
+        {/* My role */}
+        <section>
+          <SectionLabel>my contributions</SectionLabel>
+          <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 space-y-3">
+            <ul className="space-y-2 text-sm text-[var(--muted)]">
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> <strong>Model refinement:</strong> Designing and iterating on Dante&rsquo;s rule set — writing the prompt architecture, examples, and constraints that determine output quality</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> <strong>Training loop:</strong> Building the feedback cycle where Dante corrections inform Gru (the PR review bot) rules, and Gru results feed back into Dante calibration</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> <strong>AI evals:</strong> Designing evaluation harnesses that measure whether rule changes improve or regress output quality across the corpus</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> <strong>Infrastructure:</strong> Building the tooling that powers bulk violation detection, fix generation, and submission workflows</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> <strong>Project Typo-be-Gone:</strong> Operating the initiative that has fixed 18,000+ string violations across codebase and public-facing product writing</li>
+            </ul>
+          </div>
+        </section>
+
+        {/* Architecture */}
+        <section>
+          <SectionLabel>architecture</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              Dante operates across multiple surfaces — as a Claude Code plugin for interactive writing,
+              as a Toolshed MCP integration for programmatic review, and as a bulk-fix dashboard for
+              at-scale remediation. The architecture supports two distinct modes:
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5">
+                <div className="text-[10px] font-mono uppercase tracking-wide text-[var(--accent)] mb-2">Generative mode</div>
+                <p className="text-xs text-[var(--muted)] leading-relaxed">
+                  Writing new copy — error messages, notifications, onboarding flows, emails, documentation.
+                  Dante pulls context from Jira, Figma, Dovetail, Sourcegraph, and Google Drive to write
+                  informed content that follows Stripe standards.
+                </p>
+              </div>
+              <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-5">
+                <div className="text-[10px] font-mono uppercase tracking-wide text-[var(--accent)] mb-2">Evaluative mode</div>
+                <p className="text-xs text-[var(--muted)] leading-relaxed">
+                  Reviewing and fixing existing copy — two-pass architecture with fast regex-based
+                  mechanical checks followed by deep AI judgment for nuanced rules. Generates fix
+                  suggestions with reasoning chains.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Rules */}
+        <section>
+          <SectionLabel>rule design</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              Dante&rsquo;s rule set isn&rsquo;t a flat list — it&rsquo;s a system of interacting
+              constraints with deliberate priority ordering, cluster relationships, and tension points.
+              Rules fall into two categories:
+            </p>
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 space-y-3">
+              <div className="space-y-2 text-xs text-[var(--muted)]">
+                <div className="flex gap-3">
+                  <span className="text-[var(--accent)] shrink-0 font-mono text-[10px]">AI rules</span>
+                  <span>Use LLM judgment to detect violations requiring nuance — tone, voice, clarity, positive framing. Each rule has a prompt, examples, and a filter pattern for pre-selection.</span>
+                </div>
+                <div className="flex gap-3">
+                  <span className="text-[var(--accent)] shrink-0 font-mono text-[10px]">Pattern rules</span>
+                  <span>Direct find-and-replace for mechanical issues — cancelled&rarr;canceled, smart quotes, hyphenation with numbers, em dash spacing. Deterministic, fast, no LLM needed.</span>
+                </div>
+              </div>
+            </div>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The design challenge: rules interact. A brevity rule might conflict with a clarity rule.
+              A positive-framing rule might fight a directness rule in error states. My work involves
+              identifying these tension points, defining priority hierarchies, and building eval fixtures
+              that exercise cluster boundaries — so a rule change in one area doesn&rsquo;t regress another.
+            </p>
+          </div>
+        </section>
+
+        {/* Gru loop */}
+        <section>
+          <SectionLabel>dante &rarr; gru feedback loop</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              Gru is Stripe&rsquo;s AI pull request reviewer. Dante and Gru form an iterative loop:
+              Dante defines what correct writing looks like, and Gru enforces those standards at the
+              PR level. When Gru catches violations in code review, the patterns feed back into
+              Dante&rsquo;s rule refinement — surfacing new edge cases, false positive patterns, and
+              rules that need tighter scoping.
+            </p>
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6">
+              <div className="text-[var(--muted)] mb-4 text-[10px] font-mono uppercase tracking-wide">Feedback cycle</div>
+              <div className="flex flex-col gap-2">
+                {[
+                  { label: "Dante rule authored", detail: "New or refined writing standard with examples" },
+                  { label: "Gru rule created", detail: "PR-level enforcement derived from Dante standard" },
+                  { label: "PR violations flagged", detail: "Gru catches issues in live code changes" },
+                  { label: "Corrections observed", detail: "How engineers respond — accept, dismiss, or modify" },
+                  { label: "Dante rule refined", detail: "Edge cases and false positives feed back into rule design" },
+                ].map((step, i) => (
+                  <div key={step.label} className="flex items-center gap-3">
+                    <div className="flex flex-col items-center">
+                      <div className="w-7 h-7 rounded-full flex items-center justify-center text-[10px] font-mono font-bold bg-[var(--accent)]/20 text-[var(--accent)]">
+                        {String(i + 1).padStart(2, "0")}
+                      </div>
+                      {i < 4 && <div className="w-px h-4 bg-[var(--border)]" />}
+                    </div>
+                    <div className="flex-1 flex items-baseline justify-between gap-4 py-1.5">
+                      <span className="text-xs font-medium text-[var(--foreground)]">{step.label}</span>
+                      <span className="text-[10px] font-mono text-[var(--muted)] opacity-60">{step.detail}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Typo-be-Gone */}
+        <section>
+          <SectionLabel>project typo-be-gone</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              Typo-be-Gone is the operational initiative that applies Dante&rsquo;s rules at scale —
+              auditing the full string corpus, generating fix suggestions, and submitting corrections
+              in bulk. The workflow: define a rule, verify it against sampled strings, review AI-generated
+              fixes, then submit batches across the codebase and public documentation.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
+                <div className="text-lg font-bold text-[var(--accent)]">18,000+</div>
+                <div className="text-[10px] font-mono text-[var(--muted)] mt-1">violations fixed</div>
+              </div>
+              <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
+                <div className="text-lg font-bold text-[var(--accent)]">70+</div>
+                <div className="text-[10px] font-mono text-[var(--muted)] mt-1">active rules</div>
+              </div>
+              <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4 text-center">
+                <div className="text-lg font-bold text-[var(--accent)]">2</div>
+                <div className="text-[10px] font-mono text-[var(--muted)] mt-1">surfaces (code + docs)</div>
+              </div>
+            </div>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              Fixes span both in-code strings (dashboard UI, error messages, notifications) and
+              public-facing documentation on docs.stripe.com. Each fix is reviewed by a human before
+              submission — Dante proposes, humans approve. The 18,000 figure represents actual shipped
+              corrections, not suggestions generated.
+            </p>
+          </div>
+        </section>
+
+        {/* Evals */}
+        <section>
+          <SectionLabel>evaluation infrastructure</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              Changing a rule in a 70+ rule system can improve one surface while regressing another.
+              The eval infrastructure I built addresses this with structured testing before any rule
+              ships to production:
+            </p>
+            <ul className="space-y-2 text-sm text-[var(--muted)]">
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> Dual-pass rewrites comparing before/after output quality</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> Blinded judge scoring with position-swap debiasing</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> Cluster fixture regression tests exercising known rule tensions</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> Golden set validation (16 human-labeled pairs) measuring judge reliability via Cohen&rsquo;s kappa</li>
+              <li className="flex gap-2"><span className="text-[var(--accent)]">&rarr;</span> Automated SHIP/REVISE/REJECT recommendations per proposed change</li>
+            </ul>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The goal: rule governance with the same rigor as code — version control, automated
+              testing, quantitative measurement, and a defined threshold below which a change
+              doesn&rsquo;t ship.
+            </p>
+          </div>
+        </section>
+
+        {/* Surfaces */}
+        <section>
+          <SectionLabel>where dante lives</SectionLabel>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
+              <span className="text-xs font-semibold text-[var(--foreground)]">Claude Code plugin</span>
+              <p className="text-[10px] text-[var(--muted)] mt-1">Interactive writing and review for designers and PMs — auto-invoked on content tasks</p>
+            </div>
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
+              <span className="text-xs font-semibold text-[var(--foreground)]">Gru PR enforcement</span>
+              <p className="text-[10px] text-[var(--muted)] mt-1">Automated review on every pull request touching user-facing strings</p>
+            </div>
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
+              <span className="text-xs font-semibold text-[var(--foreground)]">Dante Dashboard</span>
+              <p className="text-[10px] text-[var(--muted)] mt-1">Rule creation, verification, and bulk fix workflows at admin.corp.stripe.com</p>
+            </div>
+            <div className="bg-[var(--surface)] border border-[var(--border)] rounded-lg p-4">
+              <span className="text-xs font-semibold text-[var(--foreground)]">Toolshed MCP</span>
+              <p className="text-[10px] text-[var(--muted)] mt-1">Programmatic access for automated pipelines and downstream integrations</p>
+            </div>
+          </div>
+        </section>
+
+        {/* The thread */}
+        <section>
+          <SectionLabel>the design angle</SectionLabel>
+          <div className="space-y-4">
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              Dante represents a shift in what &ldquo;content design&rdquo; means at scale. The
+              traditional framing: a designer writes and reviews copy. The expanded framing: a
+              designer designs the model that writes and reviews copy — defining rules, training
+              judgment, measuring quality, and governing changes with the same rigor applied to
+              shipping code.
+            </p>
+            <p className="text-[15px] text-[var(--foreground)] opacity-90 leading-relaxed">
+              My role isn&rsquo;t prompt engineering in the narrow sense. It&rsquo;s system design
+              applied to language quality — building an evaluable, improvable, governable machine
+              that executes designer judgment at a scale no human team could achieve alone.
+            </p>
+          </div>
+        </section>
+
+        <footer className="pt-8 border-t border-[var(--border)]">
+          <p className="text-xs font-mono text-[var(--muted)] opacity-50">
+            // model in production · typo-be-gone ongoing · gru loop active
+          </p>
+        </footer>
+      </main>
+    </div>
+  );
+}
+
 function SkillsPersonalSoftware({ project }: { project: typeof projects[number] }) {
   return (
     <div className="flex flex-col flex-1">
@@ -997,6 +1516,82 @@ function SkillsPersonalSoftware({ project }: { project: typeof projects[number] 
               blinded judge that scores output quality without knowing which version applied the
               new rule. Position-swapping across two passes eliminates anchoring bias. A golden
               set of 16 human-labeled pairs validates the judge&rsquo;s calibration independently.
+            </p>
+          </div>
+        </section>
+
+        {/* Content Tracer */}
+        <section>
+          <SectionLabel>content tracer</SectionLabel>
+          <SkillCard
+            title="Content Tracer"
+            type="Claude skill"
+            description="A search skill that lets non-engineers trace any URL, copy string, or feature name across a massive frontend codebase — identifying every component that surfaces it, what type it is, when it triggers, and exactly where to make changes. Outputs a structured Google Doc report."
+            details={[
+              "parallel Task agents per match",
+              "import-chain following",
+              "component type classification",
+              "trigger condition extraction",
+              "Google Doc output",
+            ]}
+          />
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The problem: a designer needs to update a URL or change copy across the dashboard. The
+              string appears in 5&ndash;15 places across a monorepo with millions of files. Finding them
+              manually via Sourcegraph requires knowing which repos to search, following import chains
+              when copy lives in separate message files, and understanding conditional rendering logic
+              to know when each instance is actually visible to users.
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              Content Tracer collapses a 45-minute manual audit into seconds. It parses the query
+              (URL, string, or concept), runs parallel searches across the right repos, filters out
+              test/admin noise, then dispatches one agent per match to extract context: component type
+              (DashboardNotice vs. Toast vs. Dialog), trigger condition in plain English, resolved copy
+              text (following i18n keys to their definitions), and Figma Code Connect references if present.
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The output is a shareable Google Doc with a summary table and per-instance detail sections —
+              everything a designer or PM needs to scope a content change without asking an engineer
+              to trace the code for them.
+            </p>
+          </div>
+        </section>
+
+        {/* Figma Bridge */}
+        <section>
+          <SectionLabel>figma bridge</SectionLabel>
+          <SkillCard
+            title="Figma Bridge"
+            type="Claude tool"
+            description="A programmatic pipeline that reconstructs Dashboard pages from real design system components inside Figma — turning screenshots into editable, library-linked component instances via the Figma Plugin API. Bridges the gap between 'what the page looks like' and 'what a designer can edit.'"
+            details={[
+              "Screenshot → Sail JSX → Figma instances",
+              "two-pass walker architecture",
+              "component key resolution at build time",
+              "slot-based composition",
+            ]}
+          />
+          <div className="mt-4 space-y-3">
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              The problem: designers paste screenshots into Figma as flat images. They&rsquo;re
+              uneditable — you can&rsquo;t change a label, swap an icon, or test an alternative layout.
+              Recreating pages manually from the design system library takes hours of dragging, nesting,
+              and property configuration.
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              Figma Bridge solves this with a two-pass walker: the build pass instantiates real library
+              components (PageHeader, PageModule, EmptyState, Tabs) and detaches parent containers to
+              expose content slots. The override pass fills in text, swaps icons, and sets visibility
+              properties. Component keys are resolved dynamically via design system search — so the
+              bridge doesn&rsquo;t break when the library ships new versions.
+            </p>
+            <p className="text-sm text-[var(--muted)] leading-relaxed">
+              Key discovery: parent containers like PageModule require a double-detach (the module
+              itself, then its nested &ldquo;Content&rdquo; instance) before children can be inserted
+              into content slots. This fragility is managed by a mapping config that declares each
+              component&rsquo;s detach behavior, slot names, and variant rules — making the system
+              extensible without modifying walker logic.
             </p>
           </div>
         </section>

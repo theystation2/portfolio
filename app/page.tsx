@@ -201,6 +201,15 @@ export default function Home() {
         </div>
       </main>
 
+      <div className="w-full max-w-3xl mx-auto px-6 pb-16 text-center">
+        <a
+          href="mailto:jackphorton@proton.me"
+          className="inline-block px-6 py-3 text-sm font-medium rounded-lg bg-[var(--accent)] text-white hover:opacity-90 transition-opacity"
+        >
+          Contact me
+        </a>
+      </div>
+
       <footer className="mt-auto py-10 text-center">
         <Annotation text="↑ end of indexable content. Below: chrome only." type="block" />
         <p className="text-xs font-mono text-[var(--muted)] opacity-40">
