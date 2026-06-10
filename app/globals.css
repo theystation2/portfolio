@@ -330,6 +330,8 @@ body {
 [data-mode="maximalist"] [class*="border-y"] {
   border-color: var(--accent) !important;
   border-width: 2px !important;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 [data-mode="maximalist"] [class*="gap-4"] {
