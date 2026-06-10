@@ -5,6 +5,7 @@ import { TransitOverlay } from "./TransitOverlay";
 
 export function TransitButton() {
   const [active, setActive] = useState(false);
+  const [catMode, setCatMode] = useState(false);
 
   useEffect(() => {
     if (active) {
@@ -13,6 +14,16 @@ export function TransitButton() {
       document.documentElement.removeAttribute("data-transit");
     }
   }, [active]);
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setCatMode(document.documentElement.hasAttribute("data-cat"));
+    });
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-cat"] });
+    return () => observer.disconnect();
+  }, []);
+
+  if (catMode) return null;
 
   return (
     <>
