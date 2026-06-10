@@ -82,72 +82,66 @@ export default function ResumePage() {
       </header>
 
       <main className="w-full max-w-3xl mx-auto px-6 pb-24 space-y-12">
+        {/* Profile */}
+        <section>
+          <SectionLabel>profile</SectionLabel>
+          <p className="text-sm text-[var(--muted)] leading-relaxed">
+            Montréal-based content designer with a doctorate in English. Training in knowledge management, teaching, and 10+ years of content design experience. Comfortable in frontier AI technologies with multiple public deployments, local apps, and custom workflows.
+          </p>
+        </section>
+
         {/* Experience */}
         <section>
-          <SectionLabel>experience</SectionLabel>
+          <SectionLabel>experience [abridged]</SectionLabel>
 
           <Role
-            title="Staff Content Designer"
+            title="Content designer"
             company="Stripe"
-            period="Aug 2024 – present"
-            description="Design lead for billing, tax, reporting, and accounting. Information architecture, content systems, and operational automation."
-            highlights={[
-              "Led billing IA redesign — navigation principles, object placement, and agent-ready overview surfaces",
-              "Designed automated communications triage system — LLM-evaluated pipeline replacing manual review",
-              "Built structured evaluation framework for UX writing rule changes (blinded judging, regression testing)",
-              "SaaS pricing content strategy — $2.5–3M/month projected revenue uplift",
-              "Label standardization taxonomy and Sail design system contributions",
-              "Cross-product voice & tone meta-analysis across 12 product areas",
-            ]}
+            period="Aug 2022 – present"
+            description="AI systems, support tooling, dev ops, and systems work (now), including content automation, governance implementation, and local development. Content at scale, lead content designer in revenue space, and general jack-of-all-trades (then), including audits, friction logging, production-ready prototyping, string iteration, content guidance, self-serve documentation."
           />
 
           <Role
-            title="Content Designer"
-            company="Stripe"
-            period="Aug 2022 – Aug 2024"
-            description="Design for Revenue & Finance Automation. Billing, tax, reporting, Sigma, and accounting surfaces."
-          />
-
-          <Role
-            title="Senior Content Designer"
+            title="Content lead"
             company="Wealthsimple"
-            period="Aug 2021 – Jul 2022"
-            description="Design for fintech products — investing, savings, and tax filing. Writing for complex financial concepts in a consumer-friendly register."
+            period="May – Aug 2022"
           />
 
           <Role
-            title="Senior Content Designer"
+            title="Lead content designer"
+            company="Wealthsimple"
+            period="2021 – May 2022"
+          />
+
+          <Role
+            title="Senior content designer"
             company="Shopify"
-            period="Mar 2021 – Aug 2021"
-            description="Design for core commerce surfaces. Merchant-facing admin, checkout, and payments."
+            period="2020 – 2021"
           />
 
           <Role
-            title="Content Designer"
+            title="Researcher"
             company="Shopify"
-            period="Nov 2019 – Mar 2021"
-            description="Internal research, experience mapping, workflow development, prototyping, content best-practices, taxonomies, hierarchies, and knowledge management."
+            period="2018 – 2019"
           />
 
           <Role
-            title="Content Strategist — Knowledge Management"
+            title="Content designer"
             company="Shopify"
-            period="Jan 2017 – Nov 2019"
-            description="Design for internal tooling — wikis, support information, support tooling such as chat and call functionality."
+            period="2017 – 2019"
           />
 
           <Role
-            title="Adjunct Professor"
+            title="Customer support agent"
+            company="Shopify"
+            period="2016 – 2017"
+          />
+
+          <Role
+            title="Professor"
             company="University of Ottawa"
-            period="Sep 2016 – Jan 2020"
-            description="Taught university-level writing, rhetoric, and literary analysis while completing doctoral research in English literature."
-          />
-
-          <Role
-            title="Graduate Teaching Assistant"
-            company="University of Ottawa"
-            period="Sep 2014 – Nov 2019"
-            description="Teaching assistant for undergraduate English and writing courses throughout doctoral program."
+            period="2014 – 2019"
+            description="Associate teacher in speculative fiction and queer cinema."
           />
         </section>
 
@@ -156,10 +150,9 @@ export default function ResumePage() {
           <SectionLabel>education</SectionLabel>
 
           <Role
-            title="PhD, English Literature"
-            company="University of Ottawa"
-            period="2014 – 2020"
-            description="Doctoral research in American transcendentalism. Focus on rhetoric, language philosophy, and the relationship between form and meaning."
+            title="PhD, English"
+            company="University of Ottawa, Canada"
+            period="2019"
           />
         </section>
 

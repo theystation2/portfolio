@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
+import { Geist, Geist_Mono, Playfair_Display, Nunito } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { WhimsyButton } from "@/components/WhimsyButton";
 import { ModeSwitcher } from "@/components/ModeSwitcher";
 import { CatMode } from "@/components/CatMode";
+import { TransitButton } from "@/components/transit";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -19,6 +20,11 @@ const geistMono = Geist_Mono({
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
+  subsets: ["latin"],
+});
+
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
 });
 
@@ -44,7 +50,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-theme="dark"
-      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${nunito.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <script
@@ -85,6 +91,7 @@ export default function RootLayout({
         <CatMode />
         <ThemeToggle />
         <WhimsyButton />
+        <TransitButton />
         <Analytics />
       </body>
     </html>

@@ -1006,3 +1006,1301 @@ body {
   transform: scale(1.05);
   box-shadow: 0 4px 20px rgba(255, 105, 180, 0.4);
 }
+
+/* ============================================================
+   TRANSIT MODE — LIGNE PORTFOLIO
+   A love letter to Transit & the STM.
+   Palette: Blue #009EE0, Orange #F58220, Green #008449,
+            Yellow #FFE400, Purple #781B7D
+   Bold, young, joyful. Usability < beauty.
+   ============================================================ */
+
+/* --- Activate Button (right side, bold and vibrant) --- */
+
+.transit-activate-btn {
+  position: fixed;
+  right: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 50;
+  background: linear-gradient(135deg, #001a3d 0%, #002855 100%);
+  border: 2px solid #009EE0;
+  border-radius: 16px;
+  padding: 0.85rem 1.1rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow:
+    0 4px 24px rgba(0, 158, 224, 0.25),
+    inset 0 1px 0 rgba(0, 158, 224, 0.2);
+}
+
+.transit-activate-btn:hover {
+  border-color: #F58220;
+  box-shadow:
+    0 4px 40px rgba(245, 130, 32, 0.4),
+    0 0 0 6px rgba(245, 130, 32, 0.1),
+    inset 0 1px 0 rgba(245, 130, 32, 0.3);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.transit-activate-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.transit-activate-icon {
+  filter: drop-shadow(0 0 4px rgba(0, 158, 224, 0.6));
+}
+
+.transit-activate-btn:hover .transit-activate-icon {
+  filter: drop-shadow(0 0 8px rgba(245, 130, 32, 0.8));
+}
+
+.transit-activate-label {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #009EE0;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.transit-activate-btn:hover .transit-activate-label {
+  color: #F58220;
+}
+
+.transit-activate-pulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 18px;
+  border: 2px solid #009EE0;
+  opacity: 0;
+  animation: transit-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes transit-pulse {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.06); }
+}
+
+/* --- Overlay (isolated from parent mode styles) --- */
+
+.transit-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  background: #050810;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-transform: none !important;
+  letter-spacing: normal;
+  font-style: normal;
+}
+
+.transit-overlay,
+.transit-overlay * {
+  --border: transparent;
+  --tag-bg: rgba(0, 158, 224, 0.12);
+  --tag-text: #009EE0;
+  --surface: #0a0f1e;
+  --accent: #009EE0;
+  --accent-warm: #F58220;
+  --foreground: white;
+  --muted: #8b8b9e;
+  text-transform: none !important;
+  font-style: normal !important;
+}
+
+.transit-overlay h1,
+.transit-overlay h2,
+.transit-overlay h3 {
+  font-family: var(--font-nunito), system-ui, sans-serif !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  text-shadow: none !important;
+  color: white !important;
+  opacity: 1 !important;
+}
+
+/* --- Intro Animation --- */
+
+.transit-intro {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.transit-intro-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 30%, rgba(0, 158, 224, 0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 80% 70%, rgba(245, 130, 32, 0.08) 0%, transparent 35%),
+    radial-gradient(ellipse at 50% 90%, rgba(120, 27, 125, 0.1) 0%, transparent 30%),
+    linear-gradient(180deg, #050810 0%, #0a1428 100%);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.transit-intro-bg.active {
+  opacity: 1;
+}
+
+.transit-intro-deco {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.transit-intro-deco-line {
+  position: absolute;
+  height: 6px;
+  border-radius: 3px;
+  opacity: 0.15;
+  animation: transit-deco-slide 8s ease-in-out infinite alternate;
+}
+
+.transit-intro-deco-line:nth-child(2) { animation-delay: -2s; }
+.transit-intro-deco-line:nth-child(3) { animation-delay: -4s; }
+.transit-intro-deco-line:nth-child(4) { animation-delay: -6s; }
+
+.transit-intro-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+.transit-intro-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  animation: transit-fade-in 0.5s ease forwards;
+}
+
+.transit-intro-line-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: #009EE0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: white;
+  box-shadow: 0 0 50px rgba(0, 158, 224, 0.7), 0 0 100px rgba(0, 158, 224, 0.3);
+}
+
+.transit-intro-line-text {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  opacity: 0;
+  animation: transit-slide-in 0.4s ease 0.2s forwards;
+  text-shadow: 0 0 20px rgba(0, 158, 224, 0.4);
+}
+
+.transit-intro-route {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding-left: 2rem;
+}
+
+.transit-intro-route-line {
+  position: absolute;
+  left: 2rem;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: linear-gradient(180deg, #009EE0 0%, #F58220 30%, #008449 60%, #781B7D 100%);
+  border-radius: 3px;
+  transform-origin: top;
+  animation: transit-line-grow 1s ease forwards;
+  box-shadow: 0 0 12px rgba(0, 158, 224, 0.4);
+}
+
+.transit-intro-stop {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.3s ease;
+}
+
+.transit-intro-stop.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.transit-intro-stop.terminal .transit-intro-stop-dot {
+  width: 20px;
+  height: 20px;
+  background: white;
+  border: 3px solid #009EE0;
+  box-shadow: 0 0 16px rgba(0, 158, 224, 0.6);
+}
+
+.transit-intro-stop.terminal .transit-intro-stop-name {
+  font-weight: 800;
+  font-size: 1.2rem;
+  color: white !important;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+.transit-intro-stop-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #2a2a3e;
+  border: 2px solid #050810;
+  flex-shrink: 0;
+  position: relative;
+  left: -5px;
+  transition: all 0.3s ease;
+}
+
+.transit-intro-stop-name {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 1rem;
+  color: #4a5568;
+  font-weight: 700;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.transit-intro-board-btn {
+  margin-top: 2.5rem;
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: white;
+  background: #009EE0;
+  border: none;
+  border-radius: 16px;
+  padding: 1rem 2.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  animation: transit-fade-in 0.5s ease forwards;
+  box-shadow: 0 0 30px rgba(0, 158, 224, 0.4);
+  letter-spacing: 0.02em;
+}
+
+.transit-intro-board-btn:hover {
+  background: #F58220;
+  box-shadow: 0 0 40px rgba(245, 130, 32, 0.5);
+  transform: scale(1.05);
+}
+
+/* --- Journey Layout --- */
+
+.transit-journey {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #050810;
+  color: white;
+  position: relative;
+}
+
+.transit-journey::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 10% 80%, rgba(0, 158, 224, 0.08) 0%, transparent 35%),
+    radial-gradient(circle at 90% 20%, rgba(245, 130, 32, 0.06) 0%, transparent 30%),
+    radial-gradient(circle at 40% 40%, rgba(0, 132, 73, 0.05) 0%, transparent 25%),
+    radial-gradient(circle at 70% 70%, rgba(120, 27, 125, 0.05) 0%, transparent 25%);
+  pointer-events: none;
+  animation: transit-parallax-drift 15s ease-in-out infinite alternate;
+}
+
+.transit-main {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+}
+
+.transit-map-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-right: 1px solid rgba(0, 158, 224, 0.1);
+}
+
+.transit-info-panel {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+@media (max-width: 900px) {
+  .transit-main {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+  }
+
+  .transit-map-panel {
+    border-right: none;
+    border-bottom: 1px solid rgba(0, 158, 224, 0.1);
+    max-height: 200px;
+  }
+}
+
+.transit-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 158, 224, 0.15);
+  background: rgba(5, 8, 16, 0.95);
+  backdrop-filter: blur(12px);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.transit-exit-btn {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #8b8b9e;
+  background: rgba(0, 158, 224, 0.08);
+  border: 1px solid rgba(0, 158, 224, 0.2);
+  border-radius: 10px;
+  padding: 0.45rem 0.85rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.transit-exit-btn:hover {
+  color: white;
+  border-color: #F58220;
+  background: rgba(245, 130, 32, 0.1);
+  box-shadow: 0 0 12px rgba(245, 130, 32, 0.2);
+}
+
+.transit-line-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.transit-line-number {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #009EE0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: white;
+  box-shadow: 0 0 16px rgba(0, 158, 224, 0.5);
+}
+
+.transit-line-name {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 0.02em;
+}
+
+/* --- Real Departures --- */
+
+.transit-departures {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.transit-departure-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  animation: transit-fade-in 0.3s ease;
+}
+
+.transit-departure-badge {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  min-width: 26px;
+  text-align: center;
+}
+
+.transit-departure-headsign {
+  font-size: 0.7rem;
+  color: #8b8b9e;
+  max-width: 100px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.transit-departure-eta {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #F58220;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 8px rgba(245, 130, 32, 0.3);
+}
+
+.transit-departure-label {
+  font-size: 0.55rem;
+  color: #008449;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+/* --- Route Map Strip --- */
+
+.transit-route-map {
+  position: relative;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(0, 61, 165, 0.1);
+  flex-shrink: 0;
+  overflow-x: auto;
+  z-index: 2;
+}
+
+.transit-route-line-track {
+  position: absolute;
+  top: 50%;
+  left: 2rem;
+  right: 2rem;
+  height: 5px;
+  background: #1a1a2e;
+  border-radius: 3px;
+  transform: translateY(-50%);
+}
+
+.transit-route-line-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #009EE0, #F58220, #008449, #781B7D);
+  border-radius: 3px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 16px rgba(0, 158, 224, 0.6);
+}
+
+.transit-route-bus {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transition: left 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 3;
+  filter: drop-shadow(0 0 8px rgba(0, 61, 165, 0.6));
+}
+
+.transit-bus-icon {
+  animation: transit-bus-bounce 1.5s ease-in-out infinite;
+}
+
+.transit-route-stops {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.transit-route-stop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.3rem;
+  transition: all 0.2s;
+}
+
+.transit-route-stop:hover .transit-route-stop-dot {
+  transform: scale(1.4);
+  box-shadow: 0 0 14px rgba(0, 158, 224, 0.7);
+}
+
+.transit-route-stop-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #2a2a3e;
+  border: 2px solid #1a1a2e;
+  transition: all 0.3s ease;
+}
+
+.transit-route-stop.visited .transit-route-stop-dot {
+  background: #009EE0;
+  border-color: #009EE0;
+  box-shadow: 0 0 8px rgba(0, 158, 224, 0.5);
+}
+
+.transit-route-stop.active .transit-route-stop-dot {
+  width: 18px;
+  height: 18px;
+  background: #F58220;
+  border: 3px solid #F58220;
+  box-shadow: 0 0 24px rgba(245, 130, 32, 0.8);
+}
+
+.transit-route-stop.terminal .transit-route-stop-dot {
+  width: 15px;
+  height: 15px;
+  border-width: 3px;
+}
+
+.transit-route-stop-label {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  color: #555;
+  white-space: nowrap;
+  max-width: 90px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.2s;
+}
+
+.transit-route-stop.active .transit-route-stop-label {
+  color: white;
+  font-weight: 700;
+  max-width: none;
+}
+
+.transit-route-stop.visited .transit-route-stop-label {
+  color: #6b7fa0;
+}
+
+/* --- Content Area --- */
+
+.transit-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow-y: auto;
+  position: relative;
+}
+
+.transit-content-enter {
+  animation: transit-card-enter 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.transit-content-exit {
+  animation: transit-card-exit 0.25s ease forwards;
+}
+
+/* --- Terminal Cards --- */
+
+.transit-terminal-card {
+  text-align: center;
+  max-width: 480px;
+}
+
+.transit-terminal-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.transit-terminal-card h2 {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 2.75rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 0.75rem;
+  text-shadow: 0 0 30px rgba(0, 158, 224, 0.3);
+}
+
+.transit-terminal-welcome {
+  font-size: 1.1rem !important;
+  color: #c0c8e0 !important;
+}
+
+.transit-terminal-card p {
+  font-size: 1rem;
+  color: #8b8b9e;
+  margin-bottom: 0.5rem;
+}
+
+.transit-terminal-subtitle {
+  font-size: 0.8rem !important;
+  color: #555 !important;
+}
+
+.transit-next-departure {
+  margin-top: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1.5rem 2.5rem;
+  background: rgba(0, 158, 224, 0.08);
+  border: 2px solid rgba(0, 158, 224, 0.25);
+  border-radius: 24px;
+  backdrop-filter: blur(4px);
+}
+
+.transit-next-label {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #009EE0;
+  font-weight: 800;
+}
+
+.transit-next-name {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: white;
+}
+
+.transit-next-eta {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #F58220;
+  text-shadow: 0 0 24px rgba(245, 130, 32, 0.5);
+}
+
+/* --- Terminus Resume Card --- */
+
+.transit-terminus-resume {
+  margin-top: 2rem;
+  text-align: left;
+  background: rgba(0, 158, 224, 0.05);
+  border: 1px solid rgba(0, 158, 224, 0.15);
+  border-radius: 16px;
+  padding: 1.5rem;
+  max-width: 360px;
+  width: 100%;
+}
+
+.transit-terminus-resume-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+}
+
+.transit-terminus-resume-label {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #009EE0;
+  background: rgba(0, 158, 224, 0.12);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+}
+
+.transit-terminus-resume-name {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: white;
+}
+
+.transit-terminus-resume-profile {
+  font-size: 0.75rem;
+  color: #8ba4c8;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.transit-terminus-resume-roles {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.transit-terminus-role {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  font-size: 0.7rem;
+}
+
+.transit-terminus-role-title {
+  font-weight: 700;
+  color: #c0c8e0;
+}
+
+.transit-terminus-role-co {
+  color: #6b7fa0;
+}
+
+.transit-terminus-role-year {
+  margin-left: auto;
+  color: #4a5568;
+  font-variant-numeric: tabular-nums;
+  font-size: 0.65rem;
+}
+
+.transit-terminus-resume-edu {
+  font-size: 0.7rem;
+  color: #6b7fa0;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(0, 158, 224, 0.1);
+}
+
+.transit-terminal-actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.transit-action-btn {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  padding: 0.9rem 2rem;
+  border-radius: 14px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+  background: #009EE0;
+  color: white;
+  border: none;
+}
+
+.transit-action-btn:hover {
+  background: #F58220;
+  box-shadow: 0 0 28px rgba(245, 130, 32, 0.5);
+  transform: translateY(-2px);
+}
+
+.transit-action-secondary {
+  background: #1a1a2e;
+  border: 1px solid #2a2a3e;
+  color: #8b8b9e;
+}
+
+.transit-action-secondary:hover {
+  background: #2a2a3e;
+  color: white;
+  box-shadow: none;
+  transform: translateY(-1px);
+}
+
+/* --- Stop Cards --- */
+
+.transit-stop-card {
+  width: 100%;
+  max-width: 540px;
+  background: rgba(10, 15, 30, 0.95);
+  border: 2px solid rgba(0, 158, 224, 0.2);
+  border-radius: 24px;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 8px 40px rgba(0, 0, 0, 0.4),
+    0 0 60px rgba(0, 158, 224, 0.05);
+}
+
+.transit-stop-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  background: linear-gradient(135deg, rgba(0, 158, 224, 0.1) 0%, rgba(245, 130, 32, 0.05) 100%);
+  border-bottom: 1px solid rgba(0, 158, 224, 0.12);
+}
+
+.transit-stop-arriving {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.transit-stop-arriving-label {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #009EE0;
+  font-weight: 800;
+}
+
+.transit-stop-arriving-number {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.85rem;
+  color: #8b8b9e;
+  font-weight: 600;
+}
+
+.transit-stop-eta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+}
+
+.transit-eta-number {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 4rem;
+  font-weight: 800;
+  color: #F58220;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 0 30px rgba(245, 130, 32, 0.4);
+}
+
+.transit-eta-unit {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.75rem;
+  color: #555;
+  font-weight: 600;
+}
+
+.transit-stop-card-body {
+  padding: 2rem;
+}
+
+.transit-stop-title {
+  font-family: var(--font-nunito), system-ui, sans-serif !important;
+  font-size: 1.35rem !important;
+  font-weight: 800 !important;
+  color: white !important;
+  margin-bottom: 0.85rem;
+  line-height: 1.3;
+  text-transform: none !important;
+}
+
+.transit-stop-description {
+  font-size: 0.9rem;
+  color: #8b8b9e;
+  line-height: 1.7;
+  margin-bottom: 1.5rem;
+}
+
+.transit-stop-meta {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 1.25rem;
+}
+
+.transit-stop-meta-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.transit-stop-meta-label {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #555;
+  font-weight: 700;
+}
+
+.transit-stop-meta-value {
+  font-size: 0.85rem;
+  color: #c0c8e0;
+  font-weight: 600;
+}
+
+.transit-stop-labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.transit-stop-pill {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.25rem 0.7rem;
+  border-radius: 8px;
+  background: rgba(0, 158, 224, 0.12);
+  color: #009EE0;
+  border: 1px solid rgba(0, 158, 224, 0.25);
+}
+
+.transit-stop-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 2rem;
+  border-top: 1px solid rgba(0, 61, 165, 0.1);
+  background: rgba(13, 13, 26, 0.5);
+}
+
+.transit-stop-explore-btn {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #009EE0;
+  text-decoration: none;
+  transition: all 0.15s;
+}
+
+.transit-stop-explore-btn:hover {
+  color: #F58220;
+  text-shadow: 0 0 8px rgba(245, 130, 32, 0.4);
+}
+
+.transit-stop-next-btn {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: white;
+  background: rgba(0, 158, 224, 0.15);
+  border: 1px solid rgba(0, 158, 224, 0.3);
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.transit-stop-next-btn:hover {
+  color: white;
+  background: #F58220;
+  border-color: #F58220;
+  box-shadow: 0 0 12px rgba(245, 130, 32, 0.3);
+}
+
+/* --- Inline Case Study --- */
+
+.transit-case-study {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.transit-case-study-back {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #009EE0;
+  background: rgba(0, 158, 224, 0.08);
+  border: 1px solid rgba(0, 158, 224, 0.2);
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  align-self: flex-start;
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+}
+
+.transit-case-study-back:hover {
+  color: #F58220;
+  border-color: #F58220;
+  background: rgba(245, 130, 32, 0.08);
+}
+
+.transit-case-study-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 3rem;
+  color: #8b8b9e;
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-weight: 600;
+}
+
+.transit-case-study-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 158, 224, 0.2);
+  border-top-color: #009EE0;
+  border-radius: 50%;
+  animation: transit-spin 0.8s linear infinite;
+}
+
+@keyframes transit-spin {
+  to { transform: rotate(360deg); }
+}
+
+.transit-case-study-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 0.5rem 2rem;
+  color: #c0c8e0;
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.transit-case-study-content h1,
+.transit-case-study-content h2,
+.transit-case-study-content h3 {
+  font-family: var(--font-nunito), system-ui, sans-serif !important;
+  color: white !important;
+  font-weight: 800 !important;
+  text-transform: none !important;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.transit-case-study-content h1 { font-size: 1.5rem !important; }
+.transit-case-study-content h2 { font-size: 1.2rem !important; }
+.transit-case-study-content h3 { font-size: 1rem !important; }
+
+.transit-case-study-content p {
+  margin-bottom: 1rem;
+  color: #8ba4c8 !important;
+}
+
+.transit-case-study-content a {
+  color: #009EE0 !important;
+  text-decoration: none !important;
+}
+
+.transit-case-study-content a:hover {
+  color: #F58220 !important;
+}
+
+.transit-case-study-content * {
+  text-transform: none !important;
+  border-color: rgba(0, 158, 224, 0.15) !important;
+  font-style: normal !important;
+}
+
+.transit-case-study-content img {
+  border-radius: 12px;
+  max-width: 100%;
+  margin: 1rem 0;
+}
+
+/* --- Footer Nav --- */
+
+.transit-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-top: 1px solid rgba(0, 158, 224, 0.12);
+  background: rgba(5, 8, 16, 0.95);
+  backdrop-filter: blur(12px);
+  flex-shrink: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.transit-nav-btn {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #8b8b9e;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1.25rem;
+  border-radius: 10px;
+  transition: all 0.15s;
+}
+
+.transit-nav-btn:hover:not(:disabled) {
+  color: white;
+  background: rgba(0, 61, 165, 0.15);
+}
+
+.transit-nav-btn:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.transit-stop-indicator {
+  font-family: var(--font-nunito), system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #009EE0;
+}
+
+/* --- Montreal Map --- */
+
+.transit-map-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+.transit-map-svg {
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+}
+
+.transit-map-progress-line {
+  transition: d 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 0 6px rgba(0, 158, 224, 0.5));
+}
+
+.transit-map-stop-group {
+  transition: transform 0.2s ease;
+}
+
+.transit-map-stop-group:hover {
+  filter: brightness(1.3);
+}
+
+.transit-map-stop-glow {
+  animation: transit-map-glow-pulse 2s ease-in-out infinite;
+}
+
+.transit-map-bus {
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8));
+}
+
+.transit-map-label {
+  pointer-events: none;
+  user-select: none;
+}
+
+@keyframes transit-map-glow-pulse {
+  0%, 100% { opacity: 0.2; r: 20; }
+  50% { opacity: 0.4; r: 26; }
+}
+
+/* --- Animations --- */
+
+@keyframes transit-fade-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes transit-slide-in {
+  from { opacity: 0; transform: translateX(-12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes transit-line-grow {
+  from { transform: scaleY(0); }
+  to { transform: scaleY(1); }
+}
+
+@keyframes transit-card-enter {
+  from { opacity: 0; transform: translateY(24px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes transit-card-exit {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to { opacity: 0; transform: translateY(-12px) scale(0.98); }
+}
+
+@keyframes transit-bus-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2px); }
+}
+
+@keyframes transit-parallax-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(-15px, -10px) scale(1.02); }
+}
+
+@keyframes transit-deco-slide {
+  0% { transform: translateX(0) rotate(var(--r, 0deg)); opacity: 0.1; }
+  50% { opacity: 0.2; }
+  100% { transform: translateX(20px) rotate(var(--r, 0deg)); opacity: 0.1; }
+}
+
+/* --- Responsive --- */
+
+@media (max-width: 640px) {
+  .transit-activate-btn {
+    right: 1rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .transit-route-stop-label {
+    display: none;
+  }
+
+  .transit-route-stop.active .transit-route-stop-label,
+  .transit-route-stop.terminal .transit-route-stop-label {
+    display: block;
+  }
+
+  .transit-departure-headsign {
+    display: none;
+  }
+
+  .transit-stop-card {
+    border-radius: 18px;
+  }
+
+  .transit-eta-number {
+    font-size: 2.5rem;
+  }
+
+  .transit-stop-card-body {
+    padding: 1.5rem;
+  }
+
+  .transit-terminal-card h2 {
+    font-size: 2rem;
+  }
+}
+
+/* --- Reduced Motion --- */
+
+[data-reduced-motion="true"] .transit-intro-stop,
+[data-reduced-motion="true"] .transit-content-enter,
+[data-reduced-motion="true"] .transit-content-exit,
+[data-reduced-motion="true"] .transit-bus-icon,
+[data-reduced-motion="true"] .transit-journey::before,
+[data-reduced-motion="true"] .transit-activate-pulse {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .transit-intro-stop,
+  .transit-content-enter,
+  .transit-content-exit,
+  .transit-bus-icon,
+  .transit-journey::before,
+  .transit-activate-pulse {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
